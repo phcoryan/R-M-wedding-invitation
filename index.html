@@ -693,10 +693,7 @@
     <section class="section" id="rsvp">
         <h2 class="section-title">RSVP</h2>
         <div class="rsvp-form animate">
-            <form id="weddingRsvp"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSeUUX5KxtzuT42FCjYEm9oQRrjk5d6AhRX3uWZZ_Emi3PauWQ/formResponse"
-      method="POST"
-      target="hidden_iframe">
+            <form id="weddingRsvp">
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
@@ -857,11 +854,34 @@
         // RSVP Form Submission
         const rsvpForm = document.getElementById('weddingRsvp');
 
-rsvpForm.addEventListener('submit', function () {
-    const name = this.querySelector('input[name="entry.39616117"]').value;
-    const attendance = this.querySelector('input[name="entry.450188140"]:checked').value;
+const rsvpForm = document.getElementById('weddingRsvp');
 
-    alert(`Thank you, ${name}! Your RSVP has been ${attendance.includes('Yes') ? 'confirmed. We can’t wait to see you!' : 'received. We’ll miss you!'}`);
+rsvpForm.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop normal form submission
+
+    const formData = new FormData();
+
+    formData.append('entry.39616117', this.querySelector('input[name="entry.39616117"]').value);
+    formData.append('entry.2076540010', this.querySelector('input[name="entry.2076540010"]').value);
+    formData.append('entry.2082045851', this.querySelector('select[name="entry.2082045851"]').value);
+    formData.append('entry.450188140', this.querySelector('input[name="entry.450188140"]:checked').value);
+    formData.append('entry.310138822', this.querySelector('textarea[name="entry.310138822"]').value);
+
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSeUUX5KxtzuT42FCjYEm9oQRrjk5d6AhRX3uWZZ_Emi3PauWQ/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+    }).then(() => {
+        const name = this.querySelector('input[name="entry.39616117"]').value;
+        const attendance = this.querySelector('input[name="entry.450188140"]:checked').value;
+
+        alert(`Thank you, ${name}! Your RSVP has been ${attendance.includes('Yes') ? 'confirmed. We can’t wait to see you!' : 'received. We’ll miss you!'}`);
+
+        rsvpForm.reset();
+    }).catch(error => {
+        alert('There was an error submitting your RSVP. Please try again.');
+        console.error(error);
+    });
 });
 
         // Back to Top Button
