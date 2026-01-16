@@ -854,18 +854,13 @@
         // RSVP Form Submission
         const rsvpForm = document.getElementById('weddingRsvp');
 
-rsvpForm.addEventListener('submit', function() {
+rsvpForm.addEventListener('submit', function () {
     const name = this.querySelector('input[name="entry.39616117"]').value;
     const attendance = this.querySelector('input[name="entry.450188140"]:checked').value;
 
     alert(`Thank you, ${name}! Your RSVP has been ${attendance.includes('Yes') ? 'confirmed. We can’t wait to see you!' : 'received. We’ll miss you!'}`);
-
-    setTimeout(() => {
-        this.reset();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 500);
 });
-
+</script>
         // Back to Top Button
         const fab = document.getElementById('fab');
         fab.addEventListener('click', () => {
