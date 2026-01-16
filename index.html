@@ -853,11 +853,12 @@
 
         // RSVP Form Submission
         const rsvpForm = document.getElementById('weddingRsvp');
-rsvpForm.addEventListener('submit', function() {
-    const name = this.querySelector('input[type="text"]').value;
-    const attendance = this.querySelector('input[name="attendance"]:checked').value;
 
-    alert(`Thank you, ${name}! Your RSVP has been ${attendance === 'yes' ? 'confirmed. We can\'t wait to see you!' : 'received. We\'ll miss you!'}`);
+rsvpForm.addEventListener('submit', function() {
+    const name = this.querySelector('input[name="entry.39616117"]').value;
+    const attendance = this.querySelector('input[name="entry.450188140"]:checked').value;
+
+    alert(`Thank you, ${name}! Your RSVP has been ${attendance.includes('Yes') ? 'confirmed. We can’t wait to see you!' : 'received. We’ll miss you!'}`);
 
     setTimeout(() => {
         this.reset();
