@@ -694,23 +694,13 @@
         <h2 class="section-title">RSVP</h2>
         <div class="rsvp-form animate">
             <form id="weddingRsvp"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSeUUX5KxtzuT42FCjYEm9oQRrjk5d6AhRX3uWZZ_Emi3PauWQ/formResponse"
-      method="POST"
-      target="hidden_iframe">
-	  
-	  <input type="hidden" name="fvv" value="1">
-<input type="hidden" name="fbzx" value="-1527142220484653723">
-<input type="hidden" name="pageHistory" value="0">
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<!-- REQUIRED hidden sentinel field -->
-<input type="hidden" name="entry.450188140_sentinel">
+      action="https://script.google.com/macros/s/AKfycbw90TlU8tMKdK_g9kgOE2Vpd6U7Jx7F-eMpJ6gvsF9_CnJmyT1QBteGlKR56Wrj2RMB/exec"
+      method="POST">
 
 <div class="form-group">
     <label class="form-label">Your Name *</label>
     <input type="text" 
-           name="entry.39616117" 
+           name="name" 
            class="form-input" 
            placeholder="Full Name" 
            required>
@@ -719,7 +709,7 @@
 <div class="form-group">
     <label class="form-label">Email Address *</label>
     <input type="email" 
-           name="entry.2076540010" 
+           name="email" 
            class="form-input" 
            placeholder="your.email@example.com" 
            required>
@@ -727,7 +717,7 @@
 
 <div class="form-group">
     <label class="form-label">Number of Guests *</label>
-    <select name="entry.2082045851" class="form-input" required>
+    <select name="guests" class="form-input" required>
         <option value="">Select number of guests</option>
         <option value="1">1 (Just me)</option>
         <option value="2">2</option>
@@ -742,14 +732,14 @@
     <div class="radio-group">
         <label class="radio-option">
             <input type="radio" 
-                   name="entry.450188140" 
+                   name="attendance" 
                    value="Yes, I'll be there!" 
                    required>
             <span>Yes, I'll be there!</span>
         </label>
         <label class="radio-option">
             <input type="radio" 
-                   name="entry.450188140" 
+                   name="attendance" 
                    value="Sorry, can't make it">
             <span>Sorry, can't make it</span>
         </label>
@@ -758,7 +748,7 @@
 
 <div class="form-group">
     <label class="form-label">Message for the couple</label>
-    <textarea name="entry.310138822" 
+    <textarea name="message" 
               class="form-input" 
               placeholder="Leave a sweet note for the couple" 
               rows="4"></textarea>
@@ -860,8 +850,8 @@
 
         // RSVP Form Submission
 document.getElementById('weddingRsvp').addEventListener('submit', function () {
-    const name = document.querySelector('input[name="entry.39616117"]').value;
-    const attendance = document.querySelector('input[name="entry.450188140"]:checked').value;
+    const name = document.querySelector('input[name="name"]').value;
+    const attendance = document.querySelector('input[name="attendance"]:checked').value;
 
     setTimeout(() => {
         alert(`Thank you, ${name}! Your RSVP has been ${attendance.includes('Yes') ? 'confirmed. We can’t wait to see you!' : 'received. We’ll miss you!'}`);
