@@ -227,14 +227,17 @@
       text-shadow: 0 12px 30px rgba(0,0,0,.24);
     }
     .countdown{
-  grid-template-columns: repeat(4, minmax(0, 86px));
-  gap: 8px;
-	}
+      display:grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 10px;
+      justify-content:center;
+      align-items:stretch;
+    }
     .countdown-item{
-	min-width: 0;         /* let grid control width */
-	padding: 8px 10px 7px;
-	border-radius: 12px;
-	}
+  min-width: 80px;        /* was 104px */
+  padding: 8px 10px 7px;  /* was 12px 12px 10px */
+  border-radius: 12px;    /* was 16px */
+}
     .countdown-number{
       display:block;
       font-variant-numeric: tabular-nums;
