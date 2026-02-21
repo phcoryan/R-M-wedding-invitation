@@ -528,6 +528,12 @@
             .rsvp-form {
                 padding: 30px 20px;
             }
+           .gallery-item img {
+    width: 100%;
+    height: 300px;       /* adjust height */
+    object-fit: cover;   /* crops like Unsplash */
+    border-radius: 10px; /* optional styling */
+}
         }
 
         /* Animation */
@@ -675,23 +681,28 @@
     </section>
 
     <!-- Gallery -->
-    <section class="section section-bg" id="gallery">
-        <h2 class="section-title">Our Moments</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item animate">
-                <img src="https://696a415c093e5846cd3b5e0d.imgix.net/3.jpg/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engagement Photo">
-            </div>
-            <div class="gallery-item animate">
-                <img src="https://696a415c093e5846cd3b5e0d.imgix.net/2.jpg/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Travel Together">
-            </div>
-            <div class="gallery-item animate">
-                <img src="https://696a415c093e5846cd3b5e0d.imgix.net/1.jpg/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proposal Moment">
-            </div>
-            <div class="gallery-item animate">
-                <img src="https://696a415c093e5846cd3b5e0d.imgix.net/4.jpg/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portrait">
-            </div>
+<section class="section section-bg" id="gallery">
+    <h2 class="section-title">Our Moments</h2>
+    <div class="gallery-grid">
+
+        <div class="gallery-item animate">
+            <img src="1.jpg" alt="Engagement Photo">
         </div>
-    </section>
+
+        <div class="gallery-item animate">
+            <img src="2.jpg" alt="Travel Together">
+        </div>
+
+        <div class="gallery-item animate">
+            <img src="3.jpg" alt="Proposal Moment">
+        </div>
+
+        <div class="gallery-item animate">
+            <img src="4.jpg" alt="Portrait">
+        </div>
+
+    </div>
+</section>
 
     <!-- RSVP Section -->
     <section class="section" id="rsvp">
