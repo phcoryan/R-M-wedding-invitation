@@ -289,31 +289,22 @@
         }
 
         .gallery-item{
-  height: 270px;
   border-radius: var(--radius-lg);
-  overflow:hidden;
-  position:relative;
+  overflow: hidden;
+  position: relative;
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(138,79,179,.10);
   transition: var(--transition);
+
+  aspect-ratio: 4 / 3;   /* stable on desktop */
+  height: auto;          /* IMPORTANT */
 }
 
-.gallery-item::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.35));
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.gallery-item:hover{
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-}
-
-.gallery-item:hover::after{
-  opacity: 1;
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;        /* removes tiny gaps */
 }
 
         /* RSVP Form - Modern Design */
@@ -476,11 +467,7 @@
             .rsvp-form {
                 padding: 30px 20px;
             }
-           .gallery-item img {
-    width: 100%;
-    height: 300px;       /* adjust height */
-    object-fit: cover;   /* crops like Unsplash */
-    border-radius: 10px; /* optional styling */
+    
 }
 html { scroll-behavior: smooth; }
         }
