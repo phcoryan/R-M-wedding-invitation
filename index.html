@@ -7,27 +7,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root{
-  --lilac: #c9a7d8;
-  --lilac-light: #f3eaf8;
-  --lilac-dark: #8a4fb3;
-
-  --ink: #1f2430;
-  --muted: rgba(31,36,48,.72);
-
-  --bg: #f7f6fb;
-  --white: #ffffff;
-
-  --radius: 18px;
-  --radius-lg: 26px;
-
-  --shadow-sm: 0 8px 20px rgba(22, 18, 33, 0.08);
-  --shadow: 0 18px 50px rgba(22, 18, 33, 0.12);
-  --shadow-soft: 0 30px 80px rgba(22, 18, 33, 0.14);
-
-  --transition: 220ms ease;
---gray-dark: #1f2430;
-}
+        :root {
+            --lilac: #c8a2c8;
+            --lilac-light: #e6d4e6;
+            --lilac-dark: #9b59b6;
+            --gray: #7f8c8d;
+            --gray-light: #f5f7fa;
+            --gray-dark: #2c3e50;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
 
         * {
             margin: 0;
@@ -35,66 +26,68 @@
             box-sizing: border-box;
         }
 
-        body{
-  font-family: "Inter", sans-serif;
-  background:
-    radial-gradient(1200px 500px at 15% 0%, rgba(201,167,216,.25), transparent 55%),
-    radial-gradient(900px 450px at 85% 10%, rgba(138,79,179,.15), transparent 55%),
-    var(--bg);
-  color: var(--ink);
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-dark);
+            background: var(--gray-light);
+            overflow-x: hidden;
+        }
 
         /* Modern Navigation */
-        .navbar{
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1100px, calc(100% - 24px));
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(138,79,179,.12);
-  border-radius: 999px;
-  padding: 14px 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  box-shadow: var(--shadow-sm);
-}
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
 
-.logo{
-  font-family: "Playfair Display", serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--lilac-dark);
-  text-decoration: none;
-  letter-spacing: .3px;
-}
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--lilac-dark);
+            text-decoration: none;
+        }
 
-.nav-links{
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
 
-.nav-links a{
-  text-decoration: none;
-  color: rgba(31,36,48,.78);
-  font-weight: 600;
-  font-size: .95rem;
-  padding: 10px 12px;
-  border-radius: 999px;
-  transition: var(--transition);
-  position: relative;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
 
-.nav-links a:hover{
-  color: var(--lilac-dark);
-  background: rgba(201,167,216,.18);
-}
+        .nav-links a:hover {
+            color: var(--lilac-dark);
+        }
 
-.nav-links a::after{ display:none; }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--lilac-dark);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
         .mobile-menu-btn {
             display: none;
@@ -107,174 +100,207 @@
 
         /* Hero Section - Modern Design */
        /* Hero Section - Modern Design */
-.hero{
-  min-height: 85vh;  /* shorter */
-  position: relative;
-  background: url("theme.jpg") 70% 28% / cover no-repeat;
-
+.hero {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 140px 6% 60px;
-}
-
-/* Softer overlay (still readable but not too dark) */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.28));
-  z-index:1;
-}
-
-/* Layout: content left, empty space right (for faces) */
-.hero-content{
+  justify-content: center;
   position: relative;
+  padding: 100px 5% 80px;
+  text-align: center;
+
+  background: url("theme.jpg") center / cover no-repeat;
+}
+
+/* Better overlay (adjust opacity) */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* try 0.15-0.35 */
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 800px;
+  position: relative; /* IMPORTANT */
   z-index: 2;
-  margin: 0 auto;
-  width: min(580px, 90%);
-  padding: 22px 24px;
-  text-align: center;
-
-  background: rgba(255,255,255,.14);
-  border: 1px solid rgba(255,255,255,.28);
-  border-radius: 24px;
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-soft);
 }
 
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--gray-dark);
+            line-height: 1.1;
+        }
 
-/* Title + text */
-.hero-title{
-  font-family: "Playfair Display", serif;
-  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #fff;
-  line-height: 1.08;
-  text-shadow: 0 10px 30px rgba(0,0,0,.28);
-}
+        .hero-title span {
+            color: var(--lilac-dark);
+        }
 
-.hero-subtitle{
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.date-text{
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgba(255,255,255,.92);
-  letter-spacing: .4px;
-}
+        .date-box {
+            display: inline-block;
+            background: var(--white);
+            padding: 20px 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+            border: 1px solid var(--lilac-light);
+        }
 
-/* Date pill */
-.date-box{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
+        .date-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--lilac-dark);
+            letter-spacing: 1px;
+        }
 
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.25);
-  padding: 10px 16px;
-  border-radius: 999px;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
-}
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
 
-.countdown{
-  display: grid;
-  grid-template-columns: repeat(4, auto); /* 👈 no stretching */
-  justify-content: center;               /* 👈 center them */
-  gap: 8px;
-  margin-top: 16px;
-}
+        .countdown-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            min-width: 100px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
 
-.countdown-item{
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(201,167,216,.35);
-  border-radius: 16px;
-  padding: 10px 12px;
-  min-width: 85px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
 
-.countdown-item:hover{
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--lilac-dark);
+            display: block;
+            line-height: 1;
+        }
 
-.countdown-number{
-  font-size: 1.5rem;
-}
-
-.countdown-label{
-  display: block;
-  margin-top: 6px;
-  font-size: .72rem;
-  color: rgba(255,255,255,.82);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
 
         /* Modern Card Sections */
-        .section{
-  padding: 100px 5%;
-}
+        .section {
+            padding: 100px 5%;
+        }
 
-.section-title{
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.9rem, 3vw, 2.6rem);
-  text-align:center;
-  margin-bottom: 56px;
-  color: var(--ink);
-}
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--gray-dark);
+            position: relative;
+        }
 
-.section-title::after{
-  content:"";
-  display:block;
-  margin: 14px auto 0;
-  width: 88px;
-  height: 3px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, transparent, var(--lilac), var(--lilac-dark), transparent);
-}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--lilac-light), var(--lilac-dark));
+            border-radius: 2px;
+        }
 
         .section-bg {
             background: var(--white);
         }
 
         /* Timeline Design */
-       .timeline{
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-  padding: 10px 0;
-}
-.timeline::before{
-  content:"";
-  position:absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-}
-.timeline-item{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-  position: relative;
-}
-.timeline-content{
-  width: 45%;
-}
-.timeline-item:nth-child(odd) .timeline-content{ margin-right:auto; }
-.timeline-item:nth-child(even) .timeline-content{ margin-left:auto; }
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--lilac-light);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 1px solid var(--lilac-light);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border: 3px solid var(--lilac-dark);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -40px;
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--lilac-dark);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
 
         /* Gallery Grid */
         .gallery-grid {
@@ -284,71 +310,102 @@
             margin-top: 40px;
         }
 
-        .gallery-item{
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  position: relative;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(138,79,179,.10);
-  transition: var(--transition);
+        .gallery-item {
+            height: 250px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
 
-  aspect-ratio: 4 / 3;   /* stable on desktop */
-  height: auto;          /* IMPORTANT */
-}
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
 
-.gallery-item img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;        /* removes tiny gaps */
-}
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
 
         /* RSVP Form - Modern Design */
-        .rsvp-form{
-  max-width: 620px;
-  margin: 0 auto;
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(138,79,179,.12);
-  padding: 44px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-}
+        .rsvp-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
 
-.form-label{
-  font-weight: 700;
-  color: rgba(31,36,48,.85);
-}
+        .form-group {
+            margin-bottom: 25px;
+        }
 
-.form-input{
-  background: rgba(245,246,252,.75);
-  border: 1px solid rgba(138,79,179,.14);
-  border-radius: 14px;
-}
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
 
-.form-input:focus{
-  border-color: rgba(138,79,179,.45);
-  box-shadow: 0 0 0 4px rgba(201,167,216,.22);
-}
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--lilac-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
 
-.submit-btn{
-  border-radius: 14px;
-  background: linear-gradient(90deg, var(--lilac-dark), var(--lilac));
-  box-shadow: 0 14px 40px rgba(138,79,179,.22);
-}
+        .form-input:focus {
+            outline: none;
+            border-color: var(--lilac-dark);
+            box-shadow: 0 0 0 3px rgba(200,162,200,0.2);
+        }
 
-.submit-btn:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 18px 55px rgba(138,79,179,.30);
-}
-.hero-card-wrapper{
-  margin-top: -140px;   /* pulls the card up into the photo */
-  padding: 0 6%;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
-  margin-bottom: 70px;
-}
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            accent-color: var(--lilac-dark);
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--lilac), var(--lilac-dark));
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155,89,182,0.3);
+        }
 
         /* Footer */
         .footer {
@@ -405,24 +462,24 @@
         }
 
         /* Floating Action Button */
-        .fab{
-  width: 62px;
-  height: 62px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--lilac-dark), var(--lilac));
-  box-shadow: 0 18px 45px rgba(138,79,179,.30);
-}
-.fab{
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  display: none; /* will show on scroll via JS */
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1200;
-}
-
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, var(--lilac), var(--lilac-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(155,89,182,0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: var(--transition);
+        }
 
         .fab:hover {
             transform: scale(1.1);
@@ -483,29 +540,13 @@
             .rsvp-form {
                 padding: 30px 20px;
             }
-.hero{ 
-  min-height: 85vh;
-  margin-bottom: 140px; /* creates space for the overlap */
+           .gallery-item img {
+    width: 100%;
+    height: 300px;       /* adjust height */
+    object-fit: cover;   /* crops like Unsplash */
+    border-radius: 10px; /* optional styling */
 }
-
-  .hero-content{
-    margin: 0 auto;
-    text-align: center;
-    width: min(560px, 94%);
-  }
-
-  .countdown{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-.hero-card-wrapper{
-  margin-top: -140px;   /* pulls card up into the photo */
-  margin-bottom: 70px;
-}
-    
-}
-
-        
-html { scroll-behavior: smooth; }
+        }
 
         /* Animation */
         @keyframes fadeInUp {
@@ -541,42 +582,40 @@ html { scroll-behavior: smooth; }
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home"></section>
+    <section class="hero" id="home">
+        <div class="hero-content animate">
+            <h1 class="hero-title"><span>Manel & Ryan</span></h1>
+            
+			<p class="hero-subtitle">Invite you to share in the joy as they unite in marriage</p>
+			
+            <div class="date-text">Moraville The Garden </div>
+				<div class="date-text">Palestina, Pili, Camarines Sur</div>
+            <div class="date-box animate">
+                
+                
+				<i><h1><div class="date-text">April 9, 2026</div></h1></i>
+            </div>
 
-<section class="hero-card-wrapper">
-  <div class="hero-content animate">
-    <h1 class="hero-title"><span>Manel & Ryan</span></h1>
-    <p class="hero-subtitle">Invite you to share in the joy as they unite in marriage</p>
-
-    <div class="date-text">Moraville The Garden</div>
-    <div class="date-text">Palestina, Pili, Camarines Sur</div>
-
-    <div class="date-box">
-      <div class="date-text"><b>April 9, 2026</b></div>
-    </div>
-
-    <div class="countdown">
-      <div class="countdown-item">
-        <span class="countdown-number" id="days">00</span>
-        <span class="countdown-label">Days</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="hours">00</span>
-        <span class="countdown-label">Hours</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="minutes">00</span>
-        <span class="countdown-label">Minutes</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="seconds">00</span>
-        <span class="countdown-label">Seconds</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-
+            <div class="countdown animate">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Our Story Section -->
     <section class="section section-bg" id="story">
@@ -751,7 +790,22 @@ html { scroll-behavior: smooth; }
     <footer class="footer">
         <div class="footer-logo">Manel & Ryan</div>
         <p class="footer-text">Thank you for being part of our journey. We can't wait to celebrate with you on our special day!</p>
-                
+        
+        <div class="social-links">
+            <a href="#" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fas fa-heart"></i>
+            </a>
+        </div>
+        
         <div class="copyright">
             <p>© 2024 Manel & Ryan's Wedding. Made with <i class="fas fa-heart" style="color: var(--lilac);"></i></p>
             <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">Share this link with guests: https://Manel-Ryan-wedding.com</p>
