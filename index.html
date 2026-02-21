@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Manel & Ryan | Wedding</title>
-<!-- Facebook / Messenger Preview -->
-<meta property="og:title" content="Manel &amp; Ryan | Wedding">
-<meta property="og:description" content="Join us as we celebrate our wedding on April 9, 2026 • 3:00 PM at Moraville The Garden.">
-<meta property="og:url" content="https://phcoryan.github.io/R-M-wedding-invitation/">
-<meta property="og:type" content="website">
+  <!-- Facebook / Messenger Preview -->
+  <meta property="og:title" content="Manel &amp; Ryan | Wedding">
+  <meta property="og:description" content="Join us as we celebrate our wedding on April 9, 2026 • 3:00 PM at Moraville The Garden.">
+  <meta property="og:url" content="https://phcoryan.github.io/R-M-wedding-invitation/">
+  <meta property="og:type" content="website">
 
-<meta property="og:image" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
-<meta property="og:image:secure_url" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
+  <meta property="og:image:secure_url" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-<meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -227,68 +227,63 @@
     .pill i{ opacity:.9; }
 
     .countdown-wrap{
-  margin-top: 18px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;         /* center the whole block */
-  gap: 10px;
-  width: 100%;
-}
+      margin-top: 18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 10px;
+      width: 100%;
+    }
     .countdown-labelline{
-  text-align:center;
-  width: 100%;
-  max-width: 320px;           /* same width as 2 boxes + gap */
-   color: #ffffff;
-  text-shadow: 0 8px 25px rgba(0,0,0,.35);
-}
-    /* ===== COUNTDOWN DESKTOP ===== */
-.countdown{
-  display:grid;
-  gap: 10px;
-  justify-content:center;     /* centers the grid itself */
-  justify-items:center;       /* centers items inside each cell */
-}
+      text-align:center;
+      width: 100%;
+      max-width: 320px;
+      color: #ffffff;
+      text-shadow: 0 8px 25px rgba(0,0,0,.35);
+    }
+    .countdown{
+      display:grid;
+      gap: 10px;
+      justify-content:center;
+      justify-items:center;
+    }
 
-@media (min-width: 769px){
-  .countdown-labelline{ max-width: 520px; }   /* wider for 4 boxes */
-  .countdown{ grid-template-columns: repeat(4, 70px); }
-}
+    @media (min-width: 769px){
+      .countdown-labelline{ max-width: 520px; }
+      .countdown{ grid-template-columns: repeat(4, 70px); }
+    }
 
-/* Mobile: 2 x 2 */
-@media (max-width: 768px){
-  .countdown{ grid-template-columns: repeat(2, 70px); }
-}
+    @media (max-width: 768px){
+      .countdown{ grid-template-columns: repeat(2, 70px); }
+    }
 
-.countdown-item{
-  width: 70px;
-  height: 70px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.10);
-  backdrop-filter: blur(10px);
+    .countdown-item{
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
+    .countdown-number{
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
 
-.countdown-number{
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-}
-
-.countdown-unit{
-  font-size: .55rem;
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  color: rgba(255,255,255,.82);
-}
-
-
+    .countdown-unit{
+      font-size: .55rem;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: rgba(255,255,255,.82);
+    }
 
     /* Sections */
     .section{ padding: 88px 0; }
@@ -657,6 +652,40 @@
     }
     .invite-hidden{ display:none; }
 
+    /* ✅ RSVP "Screenshot Invitation" overlay additions */
+    .pass-wrap{
+      background: rgba(255,255,255,.92);
+      padding: 14px;
+      border-top: 1px solid rgba(255,255,255,.14);
+    }
+    .pass-hint{
+      text-align:center;
+      font-weight: 800;
+      color: rgba(31,36,48,.86);
+      margin: 6px 0 12px;
+    }
+    .pass-img{
+      width: 100%;
+      display:block;
+      border-radius: 18px;
+      border: 1px solid rgba(138,79,179,.12);
+      box-shadow: 0 18px 45px rgba(22,18,33,.18);
+      background: #fff;
+    }
+    .pass-actions{
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      padding: 14px 14px 16px;
+      background: rgba(255,255,255,.08);
+      border-top: 1px solid rgba(255,255,255,.14);
+      flex-wrap: wrap;
+    }
+    .pass-actions .btn-primary{
+      min-width: 240px;
+      flex: 0 1 auto;
+    }
+
     /* Responsive */
     @media (max-width: 980px){
       .gallery-item{ grid-column: span 6; }
@@ -693,10 +722,10 @@
         max-width: 420px;
       }
       .countdown-item{
-  min-width: 80px;        /* was 104px */
-  padding: 8px 10px 7px;  /* was 12px 12px 10px */
-  border-radius: 12px;    /* was 16px */
-}
+        min-width: 80px;
+        padding: 8px 10px 7px;
+        border-radius: 12px;
+      }
 
       .section{ padding: 70px 0; }
       .grid{ grid-template-columns: 1fr; }
@@ -751,7 +780,6 @@
       </div>
 
       <div class="invite-actions">
-        <!-- Goes to HOME and closes the invitation -->
         <a href="#home" class="btn btn-primary" id="enterSiteBtn">
           <i class="fa-solid fa-heart"></i>
           View Details
@@ -760,6 +788,48 @@
         <button class="btn btn-ghost" type="button" id="closeInviteBtn">
           <i class="fa-solid fa-xmark"></i>
           Close
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ RSVP PASS OVERLAY (shows after submit) -->
+  <section class="invite-overlay invite-hidden" id="rsvpPassOverlay" aria-label="RSVP Invitation Pass">
+    <div class="invite-card" role="dialog" aria-modal="true" aria-labelledby="rsvpPassTitle">
+      <div class="invite-hero">
+        <div class="invite-content">
+          <div class="invite-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>RSVP Submitted</span>
+          </div>
+
+          <h2 class="invite-title" id="rsvpPassTitle" style="font-size: clamp(1.8rem, 4.2vw, 2.6rem);">
+            Screenshot This Invitation
+          </h2>
+          <p class="invite-sub">
+            Please take a screenshot now. This will serve as your invitation upon entry.
+          </p>
+
+          <div class="invite-meta">
+            <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 3:00 PM</div>
+            <div class="pill"><i class="fa-solid fa-location-dot"></i> Moraville The Garden</div>
+            <div class="pill"><i class="fa-solid fa-map"></i> Palestina, Pili, Camarines Sur</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pass-wrap">
+        <div class="pass-hint">
+          <i class="fa-solid fa-camera"></i> Screenshot this image
+        </div>
+        <!-- ✅ Change this file to your actual invitation image if different -->
+        <img class="pass-img" src="theme.jpg" alt="Wedding invitation image for screenshot">
+      </div>
+
+      <div class="pass-actions">
+        <button class="btn btn-primary" type="button" id="closeRsvpPassBtn">
+          <i class="fa-solid fa-check"></i>
+          Done (Close)
         </button>
       </div>
     </div>
@@ -775,10 +845,11 @@
       <a href="#details">Details</a>
       <a href="#gallery">Gallery</a>
       <a href="#rsvp">RSVP</a>
-      <!-- ✅ NEW: Invitation button -->
-      <a<button type="button" id="openInviteBtn" class="nav-invite">
+
+      <!-- ✅ Fixed invalid markup: button only -->
+      <button type="button" id="openInviteBtn" class="nav-invite">
         <i class="fa-solid fa-envelope"></i> Invitation
-      </button></a>
+      </button>
     </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
@@ -786,19 +857,10 @@
     </button>
   </nav>
 
-  <!-- HOME (background retained, box removed) -->
+  <!-- HOME -->
   <section class="hero" id="home" aria-label="Home">
     <div class="hero-inner container">
       <div class="hero-content">
-        <!--<h1 class="hero-title">Manel &amp; Ryan</h1>
-        <p class="hero-subtitle">Invite you to share in the joy as they unite in marriage</p>
-
-        <div class="hero-meta" aria-label="Event details">
-          <div class="pill"><i class="fa-solid fa-location-dot"></i> Moraville The Garden</div>
-          <div class="pill"><i class="fa-solid fa-map"></i> Palestina, Pili, Camarines Sur</div>
-          <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 3:00 PM</div>
-        </div>
-		-->
         <div class="countdown-wrap" aria-label="Countdown">
           <div class="countdown-labelline">Countdown to our special day</div>
           <div class="countdown" role="group" aria-label="Time remaining">
@@ -857,17 +919,6 @@ There, they shared ice cream, and with every sweet spoonful, the conversation gr
 As they walked through the mall, ice cream in hand, they realized that the girl who loved purple and the boy who wore it were no longer strangers. In the middle of a simple afternoon, they found a sweetness that would last a lifetime.</p>
           </div>
         </div>
-
-    <!--    <div class="event">
-          <div class="event-time">
-            <div class="when">August 2021</div>
-            <div class="tag">Together</div>
-          </div>
-          <div class="event-body">
-            <h3>Moving In Together</h3>
-            <p>We got our first apartment together, filled with mismatched furniture and dreams of the future.</p>
-          </div>
-        </div> -->
 
         <div class="event">
           <div class="event-time">
@@ -1088,7 +1139,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
-    // Invitation overlay open/close (✅ no localStorage, no auto-skip)
+    // Invitation overlay open/close (no localStorage, no auto-skip)
     const inviteOverlay = document.getElementById("inviteOverlay");
     const enterSiteBtn = document.getElementById("enterSiteBtn");
     const closeInviteBtn = document.getElementById("closeInviteBtn");
@@ -1108,9 +1159,8 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     // Always show invite on initial load
     document.body.style.overflow = "hidden";
 
-    // View Details -> close invite, then smooth scroll to home
-    enterSiteBtn.addEventListener("click", (e) => {
-      // let the click still go to #home via our smooth-scroll handler
+    // View Details -> close invite
+    enterSiteBtn.addEventListener("click", () => {
       hideInvite();
     });
 
@@ -1124,16 +1174,35 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       if (e.target === inviteOverlay) hideInvite();
     });
 
-    // ✅ Navbar Invitation button opens invitation page again
+    // Navbar Invitation button opens invitation again
     openInviteBtn.addEventListener("click", () => {
-      // close mobile menu if open
       navLinks.classList.remove("active");
       mobileMenuBtn.setAttribute("aria-expanded", "false");
       mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
       showInvite();
     });
 
-    // Smooth scrolling (closes mobile menu) + if invite is open, close it first
+    // ✅ RSVP PASS overlay controls
+    const rsvpPassOverlay = document.getElementById("rsvpPassOverlay");
+    const closeRsvpPassBtn = document.getElementById("closeRsvpPassBtn");
+
+    function showRsvpPass(){
+      rsvpPassOverlay.classList.remove("invite-hidden");
+      document.body.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    function hideRsvpPass(){
+      rsvpPassOverlay.classList.add("invite-hidden");
+      document.body.style.overflow = "";
+    }
+
+    closeRsvpPassBtn.addEventListener("click", hideRsvpPass);
+    rsvpPassOverlay.addEventListener("click", (e) => {
+      if (e.target === rsvpPassOverlay) hideRsvpPass();
+    });
+
+    // Smooth scrolling (closes mobile menu) + if invite/pass is open, close it first
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -1143,10 +1212,8 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
         e.preventDefault();
 
-        // close invite if it’s open
-        if (!inviteOverlay.classList.contains("invite-hidden")){
-          hideInvite();
-        }
+        if (!inviteOverlay.classList.contains("invite-hidden")) hideInvite();
+        if (!rsvpPassOverlay.classList.contains("invite-hidden")) hideRsvpPass();
 
         navLinks.classList.remove("active");
         mobileMenuBtn.setAttribute("aria-expanded", "false");
@@ -1226,7 +1293,10 @@ There, in front of everyone they loved, he revealed the secret he had been carry
         const attendance = (fd.get("attendance") || "").toString();
         const okText = attendance.includes("Yes") ? "confirmed" : "received";
 
-        showToast(`Thank you${name ? ", " + name : ""}! Your RSVP has been ${okText}.`);
+        // ✅ Show screenshot invitation overlay after successful submit
+        showRsvpPass();
+
+        showToast(`Thank you${name ? ", " + name : ""}! Your RSVP has been ${okText}. Please screenshot your invitation.`);
         form.reset();
       }catch(err){
         showToast("We couldn’t send your RSVP via this page. Submitting normally...");
