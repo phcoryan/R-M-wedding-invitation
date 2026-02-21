@@ -147,7 +147,7 @@
     }
     .mobile-menu-btn:hover{ background: rgba(201,167,216,.18); }
 
-    /* HERO (Home) */
+    /* HERO */
     .hero{
       position: relative;
       min-height: 78vh;
@@ -180,36 +180,11 @@
       z-index: 1;
       width: 100%;
     }
-
-    /* ✅ Home box removed: use text-only overlay */
     .hero-content{
       width: min(920px, 100%);
       margin: 0 auto;
       text-align:center;
       padding: 8px 0;
-    }
-    .hero-title{
-      font-family: "Playfair Display", serif;
-      font-weight: 600;
-      color: #fff;
-      font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-      line-height: 1.08;
-      margin: 0 0 10px;
-      text-shadow: 0 16px 40px rgba(0,0,0,.28);
-    }
-    .hero-subtitle{
-      color: rgba(255,255,255,.90);
-      font-size: 1.06rem;
-      max-width: 56ch;
-      margin: 0 auto 14px;
-      text-shadow: 0 12px 30px rgba(0,0,0,.24);
-    }
-    .hero-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      justify-content:center;
-      margin-top: 10px;
     }
     .pill{
       display:inline-flex;
@@ -224,7 +199,6 @@
       font-size: .96rem;
       backdrop-filter: blur(10px);
     }
-    .pill i{ opacity:.9; }
 
     .countdown-wrap{
       margin-top: 18px;
@@ -247,16 +221,13 @@
       justify-content:center;
       justify-items:center;
     }
-
     @media (min-width: 769px){
       .countdown-labelline{ max-width: 520px; }
       .countdown{ grid-template-columns: repeat(4, 70px); }
     }
-
     @media (max-width: 768px){
       .countdown{ grid-template-columns: repeat(2, 70px); }
     }
-
     .countdown-item{
       width: 70px;
       height: 70px;
@@ -269,14 +240,12 @@
       align-items:center;
       justify-content:center;
     }
-
     .countdown-number{
       font-size: 1.2rem;
       font-weight: 700;
       color: #fff;
       line-height: 1;
     }
-
     .countdown-unit{
       font-size: .55rem;
       margin-top: 4px;
@@ -477,14 +446,6 @@
       transform: translateY(-2px);
       box-shadow: 0 18px 55px rgba(138,79,179,.30);
     }
-    .btn-ghost{
-      color: rgba(255,255,255,.92);
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.22);
-      padding: 12px 14px;
-    }
-    .btn-ghost:hover{ background: rgba(255,255,255,.16); transform: translateY(-1px); }
-
     .fineprint{ color: rgba(31,36,48,.68); font-size: .92rem; font-weight: 600; }
 
     /* Footer */
@@ -560,7 +521,7 @@
     }
     .fab:hover{ transform: translateY(-2px); }
 
-    /* INVITATION OVERLAY (shows first) */
+    /* INVITATION OVERLAY */
     .invite-overlay{
       position: fixed;
       inset: 0;
@@ -594,7 +555,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.55));
+      background: linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.60));
       z-index:0;
     }
     .invite-content{
@@ -622,10 +583,11 @@
       text-shadow: 0 18px 40px rgba(0,0,0,.32);
     }
     .invite-sub{
-      color: rgba(255,255,255,.90);
-      max-width: 60ch;
+      color: rgba(255,255,255,.92);
+      max-width: 62ch;
       margin: 0 auto;
       font-size: 1.02rem;
+      text-shadow: 0 10px 28px rgba(0,0,0,.22);
     }
     .invite-meta{
       margin-top: 16px;
@@ -641,36 +603,135 @@
       justify-content:center;
       background: rgba(255,255,255,.08);
       border-top: 1px solid rgba(255,255,255,.14);
+      flex-wrap: wrap;
     }
     .invite-actions .btn-primary{
       min-width: 240px;
       flex: 0 1 auto;
     }
     .invite-actions .btn-ghost{
+      color: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.22);
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: .3px;
+      transition: var(--transition);
       min-width: 180px;
       flex: 0 1 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      font-family: inherit;
     }
+    .invite-actions .btn-ghost:hover{ background: rgba(255,255,255,.16); transform: translateY(-1px); }
     .invite-hidden{ display:none; }
 
-    /* ✅ RSVP "Screenshot Invitation" overlay additions */
+    /* ✅ RSVP PASS "screenshot" content */
     .pass-wrap{
       background: rgba(255,255,255,.92);
       padding: 14px;
       border-top: 1px solid rgba(255,255,255,.14);
     }
-    .pass-hint{
-      text-align:center;
-      font-weight: 800;
-      color: rgba(31,36,48,.86);
-      margin: 6px 0 12px;
-    }
-    .pass-img{
-      width: 100%;
-      display:block;
+
+    /* This is the actual "invitation card image" area to screenshot */
+    .pass-card{
       border-radius: 18px;
-      border: 1px solid rgba(138,79,179,.12);
+      overflow: hidden;
+      border: 1px solid rgba(138,79,179,.14);
       box-shadow: 0 18px 45px rgba(22,18,33,.18);
       background: #fff;
+    }
+    .pass-cover{
+      position: relative;
+      height: 190px;
+      background: url("theme.jpg") center / cover no-repeat;
+      isolation: isolate;
+    }
+    .pass-cover::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65));
+    }
+    .pass-cover-inner{
+      position: absolute;
+      inset: 0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      text-align:center;
+      z-index: 1;
+      color: #fff;
+    }
+    .pass-couple{
+      font-family:"Playfair Display", serif;
+      font-weight: 600;
+      font-size: 2.0rem;
+      line-height: 1.05;
+      text-shadow: 0 16px 36px rgba(0,0,0,.35);
+      margin-bottom: 6px;
+    }
+    .pass-date{
+      font-weight: 800;
+      letter-spacing: .3px;
+      opacity: .95;
+    }
+    .pass-body{
+      padding: 14px 14px 12px;
+    }
+    .pass-greeting{
+      font-weight: 900;
+      color: rgba(31,36,48,.92);
+      margin-bottom: 8px;
+    }
+    .pass-message{
+      color: rgba(31,36,48,.78);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .pass-line{
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(138,79,179,.20), transparent);
+      margin: 12px 0;
+    }
+    .pass-details{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content:space-between;
+      color: rgba(31,36,48,.80);
+      font-weight: 800;
+    }
+    .pass-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(201,167,216,.18);
+      border: 1px solid rgba(138,79,179,.16);
+      font-weight: 900;
+      color: var(--lilac-3);
+      white-space: nowrap;
+    }
+    .pass-footer{
+      margin-top: 10px;
+      color: rgba(31,36,48,.65);
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .pass-hint{
+      text-align:center;
+      font-weight: 900;
+      color: rgba(31,36,48,.86);
+      margin: 6px 0 12px;
     }
     .pass-actions{
       display:flex;
@@ -713,20 +774,7 @@
       }
       .nav-links.active{ display:flex; }
       .nav-links a, .nav-links button{ width:100%; text-align:center; }
-
       .hero{ min-height: 74vh; padding: 100px 0 80px; background-position: 55% 25%; }
-
-      .countdown{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        width: 100%;
-        max-width: 420px;
-      }
-      .countdown-item{
-        min-width: 80px;
-        padding: 8px 10px 7px;
-        border-radius: 12px;
-      }
-
       .section{ padding: 70px 0; }
       .grid{ grid-template-columns: 1fr; }
     }
@@ -735,7 +783,7 @@
       *{ scroll-behavior: auto !important; transition: none !important; }
     }
 
-    /* Small helper toast */
+    /* Toast */
     .toast{
       position: fixed;
       left: 50%;
@@ -785,7 +833,7 @@
           View Details
         </a>
 
-        <button class="btn btn-ghost" type="button" id="closeInviteBtn">
+        <button class="btn-ghost" type="button" id="closeInviteBtn">
           <i class="fa-solid fa-xmark"></i>
           Close
         </button>
@@ -806,7 +854,9 @@
           <h2 class="invite-title" id="rsvpPassTitle" style="font-size: clamp(1.8rem, 4.2vw, 2.6rem);">
             Screenshot This Invitation
           </h2>
-          <p class="invite-sub">
+
+          <!-- ✅ This line becomes personalized -->
+          <p class="invite-sub" id="passTopMsg">
             Please take a screenshot now. This will serve as your invitation upon entry.
           </p>
 
@@ -820,10 +870,42 @@
 
       <div class="pass-wrap">
         <div class="pass-hint">
-          <i class="fa-solid fa-camera"></i> Screenshot this image
+          <i class="fa-solid fa-camera"></i> Screenshot the card below (this is your entry pass)
         </div>
-        <!-- ✅ Change this file to your actual invitation image if different -->
-        <img class="pass-img" src="theme.jpg" alt="Wedding invitation image for screenshot">
+
+        <!-- ✅ This is the "invitation image" to screenshot, now includes name + guests -->
+        <div class="pass-card" id="passCard">
+          <div class="pass-cover">
+            <div class="pass-cover-inner">
+              <div class="pass-couple">Manel &amp; Ryan</div>
+              <div class="pass-date">April 9, 2026 • 3:00 PM</div>
+            </div>
+          </div>
+
+          <div class="pass-body">
+            <div class="pass-greeting" id="passGreeting">Hi!</div>
+
+            <div class="pass-message" id="passMessage">
+              Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.
+            </div>
+
+            <div class="pass-line"></div>
+
+            <div class="pass-details">
+              <span class="pass-chip" id="passGuestsChip">
+                <i class="fa-solid fa-users"></i> Guests: —
+              </span>
+
+              <span class="pass-chip">
+                <i class="fa-solid fa-location-dot"></i> Moraville The Garden
+              </span>
+            </div>
+
+            <div class="pass-footer" id="passFooter">
+              Keep this screenshot ready on the day of the event.
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="pass-actions">
@@ -846,7 +928,6 @@
       <a href="#gallery">Gallery</a>
       <a href="#rsvp">RSVP</a>
 
-      <!-- ✅ Fixed invalid markup: button only -->
       <button type="button" id="openInviteBtn" class="nav-invite">
         <i class="fa-solid fa-envelope"></i> Invitation
       </button>
@@ -1139,7 +1220,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
-    // Invitation overlay open/close (no localStorage, no auto-skip)
+    // Invitation overlay open/close
     const inviteOverlay = document.getElementById("inviteOverlay");
     const enterSiteBtn = document.getElementById("enterSiteBtn");
     const closeInviteBtn = document.getElementById("closeInviteBtn");
@@ -1150,31 +1231,18 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
     }
-
     function hideInvite(){
       inviteOverlay.classList.add("invite-hidden");
       document.body.style.overflow = "";
     }
 
-    // Always show invite on initial load
+    // Always show invite on load
     document.body.style.overflow = "hidden";
 
-    // View Details -> close invite
-    enterSiteBtn.addEventListener("click", () => {
-      hideInvite();
-    });
+    enterSiteBtn.addEventListener("click", () => hideInvite());
+    closeInviteBtn.addEventListener("click", () => hideInvite());
+    inviteOverlay.addEventListener("click", (e) => { if (e.target === inviteOverlay) hideInvite(); });
 
-    // Close button
-    closeInviteBtn.addEventListener("click", () => {
-      hideInvite();
-    });
-
-    // Click outside the card closes overlay
-    inviteOverlay.addEventListener("click", (e) => {
-      if (e.target === inviteOverlay) hideInvite();
-    });
-
-    // Navbar Invitation button opens invitation again
     openInviteBtn.addEventListener("click", () => {
       navLinks.classList.remove("active");
       mobileMenuBtn.setAttribute("aria-expanded", "false");
@@ -1186,23 +1254,26 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     const rsvpPassOverlay = document.getElementById("rsvpPassOverlay");
     const closeRsvpPassBtn = document.getElementById("closeRsvpPassBtn");
 
+    // ✅ Dynamic text placeholders
+    const passTopMsg = document.getElementById("passTopMsg");
+    const passGreeting = document.getElementById("passGreeting");
+    const passMessage = document.getElementById("passMessage");
+    const passGuestsChip = document.getElementById("passGuestsChip");
+    const passFooter = document.getElementById("passFooter");
+
     function showRsvpPass(){
       rsvpPassOverlay.classList.remove("invite-hidden");
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
     }
-
     function hideRsvpPass(){
       rsvpPassOverlay.classList.add("invite-hidden");
       document.body.style.overflow = "";
     }
-
     closeRsvpPassBtn.addEventListener("click", hideRsvpPass);
-    rsvpPassOverlay.addEventListener("click", (e) => {
-      if (e.target === rsvpPassOverlay) hideRsvpPass();
-    });
+    rsvpPassOverlay.addEventListener("click", (e) => { if (e.target === rsvpPassOverlay) hideRsvpPass(); });
 
-    // Smooth scrolling (closes mobile menu) + if invite/pass is open, close it first
+    // Smooth scrolling closes overlays
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -1266,7 +1337,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     });
     fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    // RSVP submission (posts to Apps Script without leaving page)
+    // RSVP submission
     const form = document.getElementById("weddingRsvp");
     const toast = document.getElementById("toast");
     const submitBtn = document.getElementById("submitBtn");
@@ -1276,6 +1347,15 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       toast.style.display = "block";
       clearTimeout(showToast._t);
       showToast._t = setTimeout(() => toast.style.display = "none", 4200);
+    }
+
+    // ✅ helper: normalize guests label
+    function formatGuests(val){
+      const n = parseInt(val, 10);
+      if (!Number.isFinite(n)) return "—";
+      if (n === 1) return "1 person";
+      if (n >= 5) return "5+ persons";
+      return n + " persons";
     }
 
     form.addEventListener("submit", async (e) => {
@@ -1289,14 +1369,29 @@ There, in front of everyone they loved, he revealed the secret he had been carry
         const fd = new FormData(form);
         await fetch(form.action, { method: "POST", body: fd });
 
-        const name = (fd.get("name") || "").toString().trim();
+        const name = (fd.get("name") || "").toString().trim() || "Guest";
+        const guestsVal = (fd.get("guests") || "").toString().trim();
+        const guestsLabel = formatGuests(guestsVal);
+
         const attendance = (fd.get("attendance") || "").toString();
-        const okText = attendance.includes("Yes") ? "confirmed" : "received";
+        const accepted = attendance.toLowerCase().includes("yes");
 
-        // ✅ Show screenshot invitation overlay after successful submit
-        showRsvpPass();
+        if (accepted){
+          // ✅ Fill the pass with attendee data
+          passTopMsg.textContent = `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
+          passGreeting.textContent = `Hi ${name}!`;
+          passMessage.textContent =
+            `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
+          passGuestsChip.innerHTML = `<i class="fa-solid fa-users"></i> Guests: ${guestsLabel}`;
+          passFooter.textContent = `Name: ${name} • Entry is for ${guestsLabel}.`;
 
-        showToast(`Thank you${name ? ", " + name : ""}! Your RSVP has been ${okText}. Please screenshot your invitation.`);
+          showRsvpPass();
+          showToast(`Thank you, ${name}! RSVP confirmed. Please screenshot your invitation pass.`);
+        } else {
+          // If they declined, don't show pass (but still confirm receipt)
+          showToast(`Thank you, ${name}. Your response has been received.`);
+        }
+
         form.reset();
       }catch(err){
         showToast("We couldn’t send your RSVP via this page. Submitting normally...");
