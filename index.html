@@ -108,10 +108,14 @@
         /* Hero Section - Modern Design */
        /* Hero Section - Modern Design */
 .hero{
-  min-height: 100vh;
+  min-height: 85vh;  /* shorter */
   position: relative;
   background: url("theme.jpg") 70% 28% / cover no-repeat;
-  padding: 140px 6% 140px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 140px 6% 60px;
 }
 
 /* Softer overlay (still readable but not too dark) */
@@ -125,16 +129,13 @@
 
 /* Layout: content left, empty space right (for faces) */
 .hero-content{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 70px;
+  position: relative;
   z-index: 2;
-
-  width: min(580px, 90%);   /* 👈 smaller width */
-  padding: 22px 24px;       /* 👈 smaller padding */
-
+  margin: 0 auto;
+  width: min(580px, 90%);
+  padding: 22px 24px;
   text-align: center;
+
   background: rgba(255,255,255,.14);
   border: 1px solid rgba(255,255,255,.28);
   border-radius: 24px;
@@ -479,6 +480,14 @@
   .countdown{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+.hero-card-wrapper{
+  margin-top: -120px;   /* pulls card up slightly over image */
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
     
 }
 
@@ -553,6 +562,13 @@ html { scroll-behavior: smooth; }
             </div>
         </div>
     </section>
+
+<section class="hero-card-wrapper">
+    <div class="hero-content animate">
+        ...
+    </div>
+</section>
+
 
     <!-- Our Story Section -->
     <section class="section section-bg" id="story">
