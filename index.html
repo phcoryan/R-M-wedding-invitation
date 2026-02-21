@@ -128,16 +128,16 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 20px;                /* ✅ LOWER/HIGHER CONTROL HERE */
+  bottom: 70px;
   z-index: 2;
 
-  width: min(760px, 92%);
-  text-align: center;
+  width: min(580px, 90%);   /* 👈 smaller width */
+  padding: 22px 24px;       /* 👈 smaller padding */
 
+  text-align: center;
   background: rgba(255,255,255,.14);
   border: 1px solid rgba(255,255,255,.28);
-  border-radius: 28px;
-  padding: 28px 32px;
+  border-radius: 24px;
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-soft);
 }
@@ -184,20 +184,15 @@
 
 .countdown{
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 18px;
+  grid-template-columns: repeat(4, auto); /* 👈 no stretching */
+  justify-content: center;               /* 👈 center them */
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .countdown-item{
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(201,167,216,.35);  /* lilac border */
-  border-radius: 16px;
-  padding: 12px 10px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  padding: 10px 12px;
+  min-width: 85px;   /* 👈 smaller boxes */
 }
 
 .countdown-item:hover{
@@ -206,11 +201,7 @@
 }
 
 .countdown-number{
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
+  font-size: 1.5rem;
 }
 
 .countdown-label{
