@@ -228,21 +228,23 @@
     }
     .countdown{
   display:grid;
-  grid-template-columns: repeat(4, 70px); /* fixed square size */
+  grid-template-columns: repeat(4, 70px);
   gap: 8px;
   justify-content:center;
 }
 
+/* 📱 Mobile Fix */
+@media (max-width: 768px){
+  .countdown{
+    grid-template-columns: repeat(2, 70px); /* 2 per row */
+  }}
+
 .countdown-item{
   width: 70px;
-  height: 70px;               /* equal width & height = square */
-  padding: 0;                 /* remove padding so it's centered */
-  border-radius: 14px;        /* keep soft edges */
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.10);
-  backdrop-filter: blur(10px);
+  height: 70px;
+  border-radius: 14px;
 
-  display:flex;               /* center content perfectly */
+  display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
