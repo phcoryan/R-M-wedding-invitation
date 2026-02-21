@@ -108,25 +108,21 @@
        /* Hero Section - Modern Design */
 .hero{
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;   /* move content left */
+  display: grid;
+  place-items: center;
   position: relative;
-  padding: 140px 6% 90px;
-  text-align: left;             /* text left */
+  padding: 140px 5% 90px;
+  text-align: center;
   background: url("theme.jpg") center / cover no-repeat;
 
-  /* move background focus so faces stay visible */
-  background-position: 65% 35%; /* tweak later if needed */
+  background-position: 50% 30%; /* show faces higher */
 }
 
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(900px 500px at 50% 30%, rgba(0,0,0,.18), rgba(0,0,0,.45)),
-    linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.35));
+  background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.35));
   z-index:1;
 }
 
@@ -140,9 +136,11 @@
 }
 
 .hero-content{
-  max-width: 560px;             /* narrower so it doesn't reach faces */
+  max-width: 860px;
   position: relative;
   z-index: 2;
+
+  transform: translateY(120px); /* pushes text down */
 }
 
 .hero-title{
@@ -469,8 +467,9 @@
             }
     
 }
-html { scroll-behavior: smooth; }
+
         }
+html { scroll-behavior: smooth; }
 
         /* Animation */
         @keyframes fadeInUp {
