@@ -234,10 +234,14 @@
       align-items:stretch;
     }
     .countdown-item{
-  min-width: 80px;        /* was 104px */
-  padding: 8px 10px 7px;  /* was 12px 12px 10px */
-  border-radius: 12px;    /* was 16px */
-}
+      min-width: 104px;
+      padding: 12px 12px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      text-align:center;
+      backdrop-filter: blur(10px);
+    }
     .countdown-number{
       display:block;
       font-variant-numeric: tabular-nums;
@@ -256,6 +260,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       color: rgba(255,255,255,.82);
+    }
 
     /* Sections */
     .section{ padding: 88px 0; }
@@ -659,7 +664,11 @@
         width: 100%;
         max-width: 420px;
       }
-      .countdown-item{ min-width: 0; }
+      .countdown-item{
+  min-width: 80px;        /* was 104px */
+  padding: 8px 10px 7px;  /* was 12px 12px 10px */
+  border-radius: 12px;    /* was 16px */
+}
 
       .section{ padding: 70px 0; }
       .grid{ grid-template-columns: 1fr; }
@@ -739,10 +748,9 @@
       <a href="#gallery">Gallery</a>
       <a href="#rsvp">RSVP</a>
       <!-- ✅ NEW: Invitation button -->
-      <a <button type="button" id="openInviteBtn" class="nav-invite">
+      <button type="button" id="openInviteBtn" class="nav-invite">
         <i class="fa-solid fa-envelope"></i> Invitation
       </button>
-	  </a>
     </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
@@ -754,16 +762,15 @@
   <section class="hero" id="home" aria-label="Home">
     <div class="hero-inner container">
       <div class="hero-content">
-       <!-- <h1 class="hero-title">Manel &amp; Ryan</h1>
+        <!--<h1 class="hero-title">Manel &amp; Ryan</h1>
         <p class="hero-subtitle">Invite you to share in the joy as they unite in marriage</p>
 
-		<h1 ></h1>
         <div class="hero-meta" aria-label="Event details">
           <div class="pill"><i class="fa-solid fa-location-dot"></i> Moraville The Garden</div>
           <div class="pill"><i class="fa-solid fa-map"></i> Palestina, Pili, Camarines Sur</div>
-          <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 3:00 PM</div> 
-        </div> -->
-
+          <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 3:00 PM</div>
+        </div>
+		-->
         <div class="countdown-wrap" aria-label="Countdown">
           <div class="countdown-labelline">Countdown to our special day</div>
           <div class="countdown" role="group" aria-label="Time remaining">
