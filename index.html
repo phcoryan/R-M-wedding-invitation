@@ -92,7 +92,8 @@
       gap: 10px;
       align-items:center;
     }
-    .nav-links a{
+    .nav-links a,
+    .nav-links button{
       text-decoration:none;
       font-weight: 600;
       font-size: .95rem;
@@ -100,11 +101,26 @@
       padding: 10px 12px;
       border-radius: 999px;
       transition: var(--transition);
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
     }
-    .nav-links a:hover{
+    .nav-links a:hover,
+    .nav-links button:hover{
       background: rgba(201,167,216,.18);
       color: var(--lilac-3);
     }
+    .nav-invite{
+      color:#fff !important;
+      background: linear-gradient(90deg, var(--lilac-2), var(--lilac));
+      box-shadow: 0 12px 34px rgba(138,79,179,.22);
+    }
+    .nav-invite:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 16px 44px rgba(138,79,179,.28);
+    }
+
     .mobile-menu-btn{
       display:none;
       background:none;
@@ -152,16 +168,12 @@
       width: 100%;
     }
 
-    .hero-card{
-      width: min(760px, 100%);
+    /* ✅ Home box removed: use text-only overlay */
+    .hero-content{
+      width: min(920px, 100%);
       margin: 0 auto;
-      padding: 26px 22px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,.24);
-      background: rgba(255,255,255,.12);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 26px 80px rgba(18, 14, 28, .22);
       text-align:center;
+      padding: 8px 0;
     }
     .hero-title{
       font-family: "Playfair Display", serif;
@@ -177,6 +189,7 @@
       font-size: 1.06rem;
       max-width: 56ch;
       margin: 0 auto 14px;
+      text-shadow: 0 12px 30px rgba(0,0,0,.24);
     }
     .hero-meta{
       display:flex;
@@ -196,6 +209,7 @@
       color: rgba(255,255,255,.92);
       font-weight: 600;
       font-size: .96rem;
+      backdrop-filter: blur(10px);
     }
     .pill i{ opacity:.9; }
 
@@ -210,6 +224,7 @@
       color: rgba(255,255,255,.88);
       font-size: .95rem;
       letter-spacing: .3px;
+      text-shadow: 0 12px 30px rgba(0,0,0,.24);
     }
     .countdown{
       display:grid;
@@ -225,6 +240,7 @@
       border: 1px solid rgba(255,255,255,.22);
       background: rgba(255,255,255,.10);
       text-align:center;
+      backdrop-filter: blur(10px);
     }
     .countdown-number{
       display:block;
@@ -425,6 +441,7 @@
       justify-content:center;
       gap: 10px;
       text-decoration:none;
+      font-family: inherit;
     }
     .btn-primary{
       color:#fff;
@@ -638,10 +655,9 @@
         box-shadow: var(--shadow-sm);
       }
       .nav-links.active{ display:flex; }
-      .nav-links a{ width:100%; text-align:center; }
+      .nav-links a, .nav-links button{ width:100%; text-align:center; }
 
       .hero{ min-height: 74vh; padding: 100px 0 80px; background-position: 55% 25%; }
-      .hero-card{ padding: 22px 16px; }
 
       .countdown{
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -681,7 +697,7 @@
 
 <body>
 
-  <!-- INVITATION OVERLAY (shows first) -->
+  <!-- INVITATION OVERLAY (shows first ALWAYS, no auto-skip) -->
   <section class="invite-overlay" id="inviteOverlay" aria-label="Wedding Invitation">
     <div class="invite-card" role="dialog" aria-modal="true" aria-labelledby="inviteTitle">
       <div class="invite-hero">
@@ -709,7 +725,6 @@
           View Details
         </a>
 
-        <!-- Optional: allow closing without navigating -->
         <button class="btn btn-ghost" type="button" id="closeInviteBtn">
           <i class="fa-solid fa-xmark"></i>
           Close
@@ -728,6 +743,10 @@
       <a href="#details">Details</a>
       <a href="#gallery">Gallery</a>
       <a href="#rsvp">RSVP</a>
+      <!-- ✅ NEW: Invitation button -->
+      <button type="button" id="openInviteBtn" class="nav-invite">
+        <i class="fa-solid fa-envelope"></i> Invitation
+      </button>
     </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
@@ -735,10 +754,10 @@
     </button>
   </nav>
 
-  <!-- HOME (no "Wedding Invitation" text anymore) -->
+  <!-- HOME (background retained, box removed) -->
   <section class="hero" id="home" aria-label="Home">
     <div class="hero-inner container">
-      <div class="hero-card">
+      <div class="hero-content">
         <h1 class="hero-title">Manel &amp; Ryan</h1>
         <p class="hero-subtitle">Invite you to share in the joy as they unite in marriage</p>
 
@@ -897,7 +916,7 @@
     <div class="container">
       <div class="section-head">
         <h2 class="section-title">Our Moments</h2>
-        <p class="section-subtitle">A few photos we love. (Your images stay centered and never get covered by text.)</p>
+        <p class="section-subtitle">A few photos we love.</p>
       </div>
 
       <div class="gallery-grid" aria-label="Photo gallery">
@@ -1033,7 +1052,52 @@
       mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
-    // Smooth scrolling (closes mobile menu)
+    // Invitation overlay open/close (✅ no localStorage, no auto-skip)
+    const inviteOverlay = document.getElementById("inviteOverlay");
+    const enterSiteBtn = document.getElementById("enterSiteBtn");
+    const closeInviteBtn = document.getElementById("closeInviteBtn");
+    const openInviteBtn = document.getElementById("openInviteBtn");
+
+    function showInvite(){
+      inviteOverlay.classList.remove("invite-hidden");
+      document.body.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    function hideInvite(){
+      inviteOverlay.classList.add("invite-hidden");
+      document.body.style.overflow = "";
+    }
+
+    // Always show invite on initial load
+    document.body.style.overflow = "hidden";
+
+    // View Details -> close invite, then smooth scroll to home
+    enterSiteBtn.addEventListener("click", (e) => {
+      // let the click still go to #home via our smooth-scroll handler
+      hideInvite();
+    });
+
+    // Close button
+    closeInviteBtn.addEventListener("click", () => {
+      hideInvite();
+    });
+
+    // Click outside the card closes overlay
+    inviteOverlay.addEventListener("click", (e) => {
+      if (e.target === inviteOverlay) hideInvite();
+    });
+
+    // ✅ Navbar Invitation button opens invitation page again
+    openInviteBtn.addEventListener("click", () => {
+      // close mobile menu if open
+      navLinks.classList.remove("active");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      showInvite();
+    });
+
+    // Smooth scrolling (closes mobile menu) + if invite is open, close it first
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -1042,6 +1106,12 @@
         if (!el) return;
 
         e.preventDefault();
+
+        // close invite if it’s open
+        if (!inviteOverlay.classList.contains("invite-hidden")){
+          hideInvite();
+        }
+
         navLinks.classList.remove("active");
         mobileMenuBtn.setAttribute("aria-expanded", "false");
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
@@ -1050,43 +1120,6 @@
         const top = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
         window.scrollTo({ top, behavior: "smooth" });
       });
-    });
-
-    // Invitation overlay: show on first load, hide when entering site
-    const inviteOverlay = document.getElementById("inviteOverlay");
-    const enterSiteBtn = document.getElementById("enterSiteBtn");
-    const closeInviteBtn = document.getElementById("closeInviteBtn");
-
-    function hideInvite(){
-      inviteOverlay.classList.add("invite-hidden");
-      document.body.style.overflow = ""; // restore scroll
-      // remember for this browser so it doesn't re-show every refresh
-      try { localStorage.setItem("inviteSeen", "1"); } catch(e){}
-    }
-
-    // Lock scroll while invite is visible
-    document.body.style.overflow = "hidden";
-
-    // If already seen before, skip overlay
-    try{
-      if (localStorage.getItem("inviteSeen") === "1"){
-        inviteOverlay.classList.add("invite-hidden");
-        document.body.style.overflow = "";
-      }
-    }catch(e){}
-
-    enterSiteBtn.addEventListener("click", () => {
-      hideInvite();
-      // allow the anchor jump to #home (already in href)
-    });
-
-    closeInviteBtn.addEventListener("click", () => {
-      hideInvite();
-    });
-
-    // Optional: close overlay if user clicks outside the card
-    inviteOverlay.addEventListener("click", (e) => {
-      if (e.target === inviteOverlay) hideInvite();
     });
 
     // Countdown
