@@ -234,33 +234,19 @@
       align-items:stretch;
     }
     .countdown-item{
-      min-width: 104px;
-      padding: 12px 12px 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
-      text-align:center;
-      backdrop-filter: blur(10px);
-    }
-    .countdown-number{
-      display:block;
-      font-variant-numeric: tabular-nums;
-      font-feature-settings: "tnum" 1;
-      font-weight: 700;
-      font-size: 1.7rem;
-      color: #fff;
-      letter-spacing: .5px;
-      line-height: 1.1;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    }
-    .countdown-unit{
-      display:block;
-      margin-top: 6px;
-      font-size: .72rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.82);
-    }
+  min-width: 78px;
+  padding: 8px 10px 7px;
+  border-radius: 12px;
+}
+
+.countdown-number{
+  font-size: 1.35rem;   /* was 1.7rem */
+}
+
+.countdown-unit{
+  font-size: .65rem;    /* was .72rem */
+  letter-spacing: .8px; /* optional: slightly tighter */
+}
 
     /* Sections */
     .section{ padding: 88px 0; }
@@ -778,7 +764,6 @@
             </div>
             <div class="countdown-item">
               <span class="countdown-number" id="hours">00</span>
-              <span class="countdown-unit">Hours</span>
               <span class="countdown-unit">Hours</span>
             </div>
             <div class="countdown-item">
