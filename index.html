@@ -108,12 +108,16 @@
        /* Hero Section - Modern Design */
 .hero{
   min-height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;   /* move content left */
   position: relative;
-  padding: 130px 5% 90px;
-  text-align: center;
+  padding: 140px 6% 90px;
+  text-align: left;             /* text left */
   background: url("theme.jpg") center / cover no-repeat;
+
+  /* move background focus so faces stay visible */
+  background-position: 65% 35%; /* tweak later if needed */
 }
 
 .hero::before{
@@ -136,7 +140,7 @@
 }
 
 .hero-content{
-  max-width: 860px;
+  max-width: 560px;             /* narrower so it doesn't reach faces */
   position: relative;
   z-index: 2;
 }
@@ -186,11 +190,7 @@
 }
 
         .countdown{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin-top: 34px;
-  flex-wrap:wrap;
+  justify-content: flex-start;
 }
 
 .countdown-item{
