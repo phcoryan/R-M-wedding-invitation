@@ -112,8 +112,12 @@
   position: relative;
   padding: 140px 6% 90px;
 
-  /* Keep faces visible on the RIGHT */
-  background: url("theme.jpg") 70% 35% / cover no-repeat;
+  /* keep faces visible */
+  background: url("theme.jpg") 70% 30% / cover no-repeat;
+
+  display: flex;
+  justify-content: center;   /* CENTER horizontally */
+  align-items: flex-end;     /* PUSH to bottom */
 }
 
 /* Softer overlay (still readable but not too dark) */
@@ -130,9 +134,8 @@
   position: relative;
   z-index: 2;
 
-  width: min(520px, 92%);
-  margin: 0;                 /* left aligned */
-  text-align: left;
+  width: min(760px, 92%);
+  text-align: center;
 
   /* glass card */
   background: rgba(255,255,255,.12);
@@ -141,6 +144,9 @@
   padding: 26px 26px 22px;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
+
+  /* move slightly UP from bottom so it doesn't stick to edge */
+  margin-bottom: 40px;
 }
 
 /* Title + text */
