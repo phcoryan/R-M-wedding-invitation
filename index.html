@@ -226,23 +226,21 @@
       letter-spacing: .3px;
       text-shadow: 0 12px 30px rgba(0,0,0,.24);
     }
-    .countdown{
+    /* ===== COUNTDOWN DESKTOP ===== */
+.countdown{
   display:grid;
   grid-template-columns: repeat(4, 70px);
-  gap: 8px;
+  gap: 10px;
   justify-content:center;
 }
-
-/* 📱 Mobile Fix */
-@media (max-width: 768px){
-  .countdown{
-    grid-template-columns: repeat(2, 70px); /* 2 per row */
-  }}
 
 .countdown-item{
   width: 70px;
   height: 70px;
   border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
 
   display:flex;
   flex-direction:column;
@@ -251,7 +249,7 @@
 }
 
 .countdown-number{
-  font-size: 1.2rem;          /* slightly smaller */
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
@@ -259,10 +257,20 @@
 
 .countdown-unit{
   font-size: .55rem;
-  letter-spacing: .8px;
   margin-top: 4px;
   text-transform: uppercase;
+  letter-spacing: .8px;
   color: rgba(255,255,255,.82);
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px){
+
+  .countdown{
+    grid-template-columns: repeat(2, 70px); /* 2 per row */
+    justify-content:center;
+  }
+
 }
 
     /* Sections */
