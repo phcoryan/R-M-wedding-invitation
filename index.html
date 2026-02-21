@@ -214,24 +214,34 @@
     .pill i{ opacity:.9; }
 
     .countdown-wrap{
-      margin-top: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      align-items:center;
-    }
+  margin-top: 18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;         /* center the whole block */
+  gap: 10px;
+  width: 100%;
+}
     .countdown-labelline{
-      color: rgba(255,255,255,.88);
-      font-size: .95rem;
-      letter-spacing: .3px;
-      text-shadow: 0 12px 30px rgba(0,0,0,.24);
-    }
+  text-align:center;
+  width: 100%;
+  max-width: 320px;           /* same width as 2 boxes + gap */
+}
     /* ===== COUNTDOWN DESKTOP ===== */
 .countdown{
   display:grid;
-  grid-template-columns: repeat(4, 70px);
   gap: 10px;
-  justify-content:center;
+  justify-content:center;     /* centers the grid itself */
+  justify-items:center;       /* centers items inside each cell */
+}
+
+@media (min-width: 769px){
+  .countdown-labelline{ max-width: 520px; }   /* wider for 4 boxes */
+  .countdown{ grid-template-columns: repeat(4, 70px); }
+}
+
+/* Mobile: 2 x 2 */
+@media (max-width: 768px){
+  .countdown{ grid-template-columns: repeat(2, 70px); }
 }
 
 .countdown-item{
@@ -263,15 +273,7 @@
   color: rgba(255,255,255,.82);
 }
 
-/* ===== MOBILE FIX ===== */
-@media (max-width: 768px){
 
-  .countdown{
-    grid-template-columns: repeat(2, 70px); /* 2 per row */
-    justify-content:center;
-  }
-
-}
 
     /* Sections */
     .section{ padding: 88px 0; }
