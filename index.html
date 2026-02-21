@@ -704,10 +704,10 @@
 
       <div class="invite-actions">
         <!-- Goes to HOME and closes the invitation -->
-        <a href="#home" class="btn btn-primary" id="enterSiteBtn">
-          <i class="fa-solid fa-heart"></i>
-          View Details
-        </a>
+        <button type="button" class="btn btn-primary" id="enterSiteBtn">
+  	<i class="fa-solid fa-heart"></i>
+  	View Details
+	</button>
 
         <!-- Optional: allow closing without navigating -->
         <button class="btn btn-ghost" type="button" id="closeInviteBtn">
@@ -1023,6 +1023,10 @@
   <div class="toast" id="toast"></div>
 
   <script>
+	// Prevent auto-jump if URL contains a hash like #home
+	if (window.location.hash) {
+  	history.replaceState(null, "", window.location.pathname);
+	}
     // Mobile menu
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const navLinks = document.getElementById("navLinks");
@@ -1076,8 +1080,17 @@
     }catch(e){}
 
     enterSiteBtn.addEventListener("click", () => {
-      hideInvite();
-      // allow the anchor jump to #home (already in href)
+  hideInvite();
+
+  // Scroll to Home ONLY after click
+  const home = document.querySelector("#home");
+  const navOffset = 92;
+  const top = home.getBoundingClientRect().top + window.pageYOffset - navOffset;
+
+  window.scrollTo({ top, behavior: "smooth" });
+
+  // Also remove any hash so it won't auto-jump next reload
+  history.replaceState(null, "", window.location.pathname);
     });
 
     closeInviteBtn.addEventListener("click", () => {
@@ -1168,6 +1181,7 @@
         submitBtn.style.opacity = "1";
         submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit RSVP';
       }
+	
     });
   </script>
 </body>
