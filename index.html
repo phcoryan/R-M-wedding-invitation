@@ -20,7 +20,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ✅ Font Awesome (icons) -->
+  <!-- IMPORTANT: This exact link works. If icons don't show, your network/adblock may be blocking cdnjs. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
 
   <style>
     :root{
@@ -98,54 +101,9 @@
       .hearts-layer{ display:none !important; }
     }
 
-    /* ===== Background Music controls ===== */
+    /* ✅ REMOVE/HIDE MUSIC UI COMPLETELY */
     .bg-audio{ position: fixed; width:1px; height:1px; opacity:0; pointer-events:none; }
-    .music-chip{
-      position: fixed;
-      left: 18px;
-      bottom: 18px;
-      z-index: 3000;
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(138,79,179,.14);
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow-sm);
-    }
-    .music-chip button{
-      border: 0;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-weight: 900;
-      background: linear-gradient(90deg, var(--lilac-2), var(--lilac));
-      color: #fff;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      transition: var(--transition);
-      font-family: inherit;
-      white-space: nowrap;
-    }
-    .music-chip button:hover{ transform: translateY(-1px); }
-    .music-chip .hint{
-      color: rgba(31,36,48,.72);
-      font-weight: 800;
-      font-size: .92rem;
-      max-width: 220px;
-    }
-    .music-chip input[type="range"]{
-      width: 110px;
-      accent-color: var(--lilac-2);
-      cursor: pointer;
-    }
-    @media (max-width: 520px){
-      .music-chip .hint{ display:none; }
-      .music-chip input[type="range"]{ width: 90px; }
-    }
+    .music-chip{ display:none !important; }
 
     /* NAV */
     .navbar{
@@ -597,6 +555,16 @@
       border-color: rgba(201,167,216,.24);
       transform: translateY(-2px);
     }
+    /* ✅ if FontAwesome fails, show letters so you still "see" something */
+    .social-icon span.fallback{
+      font-weight: 900;
+      font-size: .95rem;
+      letter-spacing: .4px;
+      display:none;
+    }
+    .no-fa .social-icon i{ display:none; }
+    .no-fa .social-icon span.fallback{ display:block; }
+
     .copyright{
       margin-top: 26px;
       padding-top: 18px;
@@ -910,17 +878,10 @@
   <!-- Ambient hearts layer -->
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
-  <!-- Background Music (PUT bg-music.mp3 in repo) -->
+  <!-- (optional) Background Music kept hidden; UI removed -->
   <audio class="bg-audio" id="bgMusic" preload="auto" loop>
     <source src="bg-music.mp3" type="audio/mpeg" />
   </audio>
-
-  <!-- Music control chip (fix for autoplay restrictions) -->
-  <div class="music-chip" id="musicChip" aria-label="Music Controls">
-    <button type="button" id="musicBtn"><i class="fa-solid fa-play"></i> Play Music</button>
-    <input id="musicVol" type="range" min="0" max="100" value="35" aria-label="Volume">
-    <div class="hint" id="musicHint">Tap play once (browser blocks autoplay).</div>
-  </div>
 
   <!-- INVITATION OVERLAY -->
   <section class="invite-overlay" id="inviteOverlay" aria-label="Wedding Invitation">
@@ -936,7 +897,7 @@
           <p class="invite-sub">Please join us as we celebrate our wedding day.</p>
 
           <div class="invite-meta">
-            <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 2:00 PM</div>
+            <div class="pill"><i class="fa-solid fa-calendar-days"></i> April 9, 2026 • 3:00 PM</div>
             <div class="pill"><i class="fa-solid fa-location-dot"></i> Moraville The Garden</div>
             <div class="pill"><i class="fa-solid fa-map"></i> Palestina, Pili, Camarines Sur</div>
           </div>
@@ -1045,12 +1006,12 @@
       <a href="#rsvp">RSVP</a>
 
       <button type="button" id="openInviteBtn" class="nav-invite">
-        <span><i class="fa-solid fa-envelope"></i> Invitation</span>
+       <a> <span><i class="fa-solid fa-envelope"></i> Invitation</span></a>
       </button>
     </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
-      <i class="fas fa-bars"></i>
+      <i class="fa-solid fa-bars"></i>
     </button>
   </nav>
 
@@ -1079,7 +1040,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -1351,24 +1311,46 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       <div class="brand">Manel &amp; Ryan</div>
       <p>Thank you for being part of our journey. We can’t wait to celebrate with you on our special day.</p>
 
+      <!-- ✅ Icons fixed + fallback -->
       <div class="social-links" aria-label="Social links">
-        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <a href="#home" class="social-icon" aria-label="Back to top"><i class="fas fa-heart"></i></a>
+        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+          <i class="fa-brands fa-instagram"></i><span class="fallback">IG</span>
+        </a>
+        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+          <i class="fa-brands fa-facebook-f"></i><span class="fallback">FB</span>
+        </a>
+        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email">
+          <i class="fa-solid fa-envelope"></i><span class="fallback">@</span>
+        </a>
+        <a href="#home" class="social-icon" aria-label="Back to top">
+          <i class="fa-solid fa-heart"></i><span class="fallback">↑</span>
+        </a>
       </div>
 
       <div class="copyright">
-        <div>© 2026 Manel &amp; Ryan’s Wedding • Made with <i class="fas fa-heart" style="color: var(--lilac);"></i></div>
+        <div>© 2026 Manel &amp; Ryan’s Wedding • Made with <i class="fa-solid fa-heart" style="color: var(--lilac);"></i></div>
         <div style="margin-top:8px;">Share this link with guests: <span style="color: rgba(255,255,255,.75);">https://phcoryan.github.io/R-M-wedding-invitation/</span></div>
       </div>
     </div>
   </footer>
 
-  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
+  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
   <div class="toast" id="toast"></div>
 
   <script>
+    // ✅ Detect if FontAwesome loaded (if blocked, show fallback text)
+    (function(){
+      const test = document.createElement("i");
+      test.className = "fa-solid fa-heart";
+      test.style.position = "absolute";
+      test.style.left = "-9999px";
+      document.body.appendChild(test);
+      const ok = window.getComputedStyle(test, "::before").getPropertyValue("content");
+      document.body.removeChild(test);
+      // If content is 'none' or empty, FA isn't working
+      if (!ok || ok === "none" || ok === '""') document.documentElement.classList.add("no-fa");
+    })();
+
     // ===== Hearts continuous =====
     const heartsLayer = document.getElementById("heartsLayer");
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1402,59 +1384,13 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       for (let i=0;i<6;i++) setTimeout(spawnHeart, i*180);
     }
 
-    // ===== Music (fix autoplay restriction) =====
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    const musicVol = document.getElementById("musicVol");
-    const musicHint = document.getElementById("musicHint");
-
-    function setMusicUi(isPlaying){
-      musicBtn.innerHTML = isPlaying
-        ? '<i class="fa-solid fa-pause"></i> Pause'
-        : '<i class="fa-solid fa-play"></i> Play Music';
-      musicHint.textContent = isPlaying ? "Playing" : "Tap play once (browser blocks autoplay).";
-    }
-
-    function setVolFromSlider(){
-      const v = Math.max(0, Math.min(100, parseInt(musicVol.value, 10) || 0));
-      bgMusic.volume = v / 100;
-    }
-    setVolFromSlider();
-    musicVol.addEventListener("input", setVolFromSlider);
-
-    async function playMusic(){
-      try{
-        setVolFromSlider();
-        await bgMusic.play();
-        setMusicUi(true);
-      }catch(err){
-        // Most common cause: file missing or autoplay blocked without interaction
-        setMusicUi(false);
-        showToast("Music couldn't start. Make sure bg-music.mp3 exists in your GitHub repo.");
-      }
-    }
-    function pauseMusic(){
-      bgMusic.pause();
-      setMusicUi(false);
-    }
-
-    musicBtn.addEventListener("click", async () => {
-      if (bgMusic.paused) await playMusic();
-      else pauseMusic();
-    });
-
-    // Try preload check (helps identify missing file)
-    bgMusic.addEventListener("error", () => {
-      showToast("Music file not found. Upload bg-music.mp3 to your repo (same folder as index.html).");
-    });
-
     // ===== Mobile menu =====
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const navLinks = document.getElementById("navLinks");
     mobileMenuBtn.addEventListener("click", () => {
       const open = navLinks.classList.toggle("active");
       mobileMenuBtn.setAttribute("aria-expanded", String(open));
-      mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
     });
 
     // ===== Invitation overlay =====
@@ -1476,19 +1412,14 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     // Always show invite on load
     document.body.style.overflow = "hidden";
 
-    // Start music on "View Details" (user gesture -> allowed)
-    enterSiteBtn.addEventListener("click", async () => {
-      hideInvite();
-      if (bgMusic.paused) await playMusic();
-    });
-
+    enterSiteBtn.addEventListener("click", () => hideInvite());
     closeInviteBtn.addEventListener("click", () => hideInvite());
     inviteOverlay.addEventListener("click", (e) => { if (e.target === inviteOverlay) hideInvite(); });
 
     openInviteBtn.addEventListener("click", () => {
       navLinks.classList.remove("active");
       mobileMenuBtn.setAttribute("aria-expanded", "false");
-      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
       showInvite();
     });
 
@@ -1530,7 +1461,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
         navLinks.classList.remove("active");
         mobileMenuBtn.setAttribute("aria-expanded", "false");
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
 
         const navOffset = 92;
         const top = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
@@ -1598,13 +1529,12 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       return n + " persons";
     }
 
-    // We expect Apps Script to return JSON like:
-    // { ok:true, emailed:true/false, email:"...", message:"..." }
+    // ✅ Important:
+    // 1) Your Apps Script MUST return JSON (MimeType.JSON) to allow accurate "email sent" status.
+    // 2) Some deployments block CORS; fetch still works, but you may see opaque responses in some cases.
     async function postToAppsScript(fd){
       const res = await fetch(form.action, { method: "POST", body: fd });
       const text = await res.text();
-
-      // Try parse JSON
       try { return JSON.parse(text); } catch(_){ return { ok: true, raw: text }; }
     }
 
@@ -1627,32 +1557,28 @@ There, in front of everyone they loved, he revealed the secret he had been carry
         const attendance = (fd.get("attendance") || "").toString();
         const accepted = attendance.toLowerCase().includes("yes");
 
-        // If email empty, keep it empty (Apps Script will not send)
+        // keep empty if none
         if (!email) fd.set("email", "");
 
         const result = await postToAppsScript(fd);
 
-        // Prepare email status message
         emailStatus.style.display = "block";
-
         if (email){
-          // If Apps Script correctly returns emailed:true, show success
-          if (result && result.emailed === true){
+          if (result && result.ok === true && result.emailed === true){
             emailStatus.innerHTML = '<i class="fa-solid fa-envelope"></i> Invitation has been sent to your email.';
-          } else {
-            // if not returned or false
+          } else if (result && result.ok === false) {
             emailStatus.innerHTML =
-              '<i class="fa-solid fa-triangle-exclamation"></i> RSVP saved, but email was NOT confirmed. (Fix Apps Script email sending.)';
+              '<i class="fa-solid fa-triangle-exclamation"></i> RSVP saved, but email failed: ' + (result.error || 'Unknown error');
+          } else {
+            emailStatus.innerHTML =
+              '<i class="fa-solid fa-triangle-exclamation"></i> RSVP saved, but email was NOT confirmed. (Check Apps Script deployment + MailApp permission.)';
           }
         } else {
           emailStatus.innerHTML = '<i class="fa-solid fa-circle-info"></i> No email provided, so no email was sent.';
         }
 
         if (accepted){
-          passTopMsg.textContent =
-            email
-              ? `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`
-              : `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
+          passTopMsg.textContent = `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
 
           passGreeting.textContent = `Hi ${name}!`;
           passMessage.textContent = `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
@@ -1660,7 +1586,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
           passFooter.textContent = `Name: ${name} • Entry is for ${guestsLabel}.`;
 
           showRsvpPass();
-          showToast(email ? `Thank you, ${name}! RSVP confirmed. Check your email (if enabled).` : `Thank you, ${name}! RSVP confirmed. Screenshot your pass.`);
+          showToast(email ? `Thank you, ${name}! RSVP confirmed. Check your email.` : `Thank you, ${name}! RSVP confirmed. Screenshot your pass.`);
         } else {
           showToast(`Thank you, ${name}. Your response has been received.`);
         }
@@ -1675,94 +1601,5 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       }
     });
   </script>
-
-  <!--
-  ============================================================
-  ✅ REQUIRED: UPDATE YOUR GOOGLE APPS SCRIPT (EMAIL SENDING)
-  ============================================================
-
-  If you don't update Apps Script, NO EMAIL will arrive.
-
-  In Apps Script editor, replace your code with something like below:
-
-  function doPost(e) {
-  try {
-    if (!e || !e.parameter) {
-      return jsonResponse({ ok: false, error: "Missing form data." });
-    }
-
-    const sheet = SpreadsheetApp
-      .openById("1ck7eho99ZUX59wjdrqsHVOva4bJHxGsV9PLfGaHSM7A")
-      .getActiveSheet();
-
-    const name = (e.parameter.name || "").toString().trim();
-    const email = (e.parameter.email || "").toString().trim();
-    const guests = (e.parameter.guests || "").toString().trim();
-    const attendance = (e.parameter.attendance || "").toString().trim();
-    const message = (e.parameter.message || "").toString().trim();
-
-    // Save to sheet
-    sheet.appendRow([
-      new Date(),
-      name,
-      email,
-      guests,
-      attendance,
-      message
-    ]);
-
-    // Send email only if provided + looks valid
-    let emailed = false;
-    if (email && isValidEmail_(email)) {
-      const subject = "Manel & Ryan — RSVP Confirmation";
-
-      const body =
-        `Hi ${name || "Guest"},\n\n` +
-        `Thank you for your RSVP.\n\n` +
-        `Details:\n` +
-        `• Wedding Date: April 9, 2026\n` +
-        `• Time: 3:00 PM\n` +
-        `• Venue: Moraville The Garden, Palestina, Pili, Camarines Sur\n\n` +
-        `Your RSVP:\n` +
-        `• Attendance: ${attendance || "-"}\n` +
-        `• Guests: ${guests || "-"}\n` +
-        (message ? `• Message: ${message}\n\n` : `\n`) +
-        `Please keep a screenshot of your invitation pass from the website.\n\n` +
-        `With love,\nManel & Ryan`;
-
-      // Sends from your Google account (the one owning this script)
-      MailApp.sendEmail(email, subject, body);
-      emailed = true;
-    }
-
-    // Return JSON to website so it can display "Email sent" accurately
-    return jsonResponse({
-      ok: true,
-      emailed: emailed,
-      email: email || "",
-      name: name || "Guest"
-    });
-
-  } catch (err) {
-    return jsonResponse({
-      ok: false,
-      error: (err && err.message) ? err.message : String(err)
-    });
-  }
-}
-
-// Helper: return JSON
-function jsonResponse(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// Helper: basic email validation
-function isValidEmail_(email) {
-  // simple but effective validation
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-  -->
 </body>
 </html>
