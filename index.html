@@ -75,7 +75,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 2; /* above page, below overlays */
+      z-index: 2;
       overflow:hidden;
     }
     .heart{
@@ -98,13 +98,53 @@
       .hearts-layer{ display:none !important; }
     }
 
-    /* ===== Background music (hidden audio) ===== */
-    .bg-audio{
+    /* ===== Background Music controls ===== */
+    .bg-audio{ position: fixed; width:1px; height:1px; opacity:0; pointer-events:none; }
+    .music-chip{
       position: fixed;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      pointer-events:none;
+      left: 18px;
+      bottom: 18px;
+      z-index: 3000;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(138,79,179,.14);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+    .music-chip button{
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--lilac-2), var(--lilac));
+      color: #fff;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      transition: var(--transition);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .music-chip button:hover{ transform: translateY(-1px); }
+    .music-chip .hint{
+      color: rgba(31,36,48,.72);
+      font-weight: 800;
+      font-size: .92rem;
+      max-width: 220px;
+    }
+    .music-chip input[type="range"]{
+      width: 110px;
+      accent-color: var(--lilac-2);
+      cursor: pointer;
+    }
+    @media (max-width: 520px){
+      .music-chip .hint{ display:none; }
+      .music-chip input[type="range"]{ width: 90px; }
     }
 
     /* NAV */
@@ -192,6 +232,7 @@
       padding: 110px 0 88px;
       background: url("theme.jpg") 55% 30% / cover no-repeat;
       isolation: isolate;
+      z-index: 1;
     }
     .hero::before{
       content:"";
@@ -211,29 +252,12 @@
       z-index: 0;
       pointer-events:none;
     }
-    .hero-inner{
-      position: relative;
-      z-index: 1;
-      width: 100%;
-    }
+    .hero-inner{ position: relative; z-index: 1; width: 100%; }
     .hero-content{
       width: min(920px, 100%);
       margin: 0 auto;
       text-align:center;
       padding: 8px 0;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.92);
-      font-weight: 600;
-      font-size: .96rem;
-      backdrop-filter: blur(10px);
     }
 
     .countdown-wrap{
@@ -257,13 +281,8 @@
       justify-content:center;
       justify-items:center;
     }
-    @media (min-width: 769px){
-      .countdown-labelline{ max-width: 520px; }
-      .countdown{ grid-template-columns: repeat(4, 70px); }
-    }
-    @media (max-width: 768px){
-      .countdown{ grid-template-columns: repeat(2, 70px); }
-    }
+    @media (min-width: 769px){ .countdown{ grid-template-columns: repeat(4, 70px); } }
+    @media (max-width: 768px){ .countdown{ grid-template-columns: repeat(2, 70px); } }
     .countdown-item{
       width: 70px;
       height: 70px;
@@ -276,12 +295,7 @@
       align-items:center;
       justify-content:center;
     }
-    .countdown-number{
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-    }
+    .countdown-number{ font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1; }
     .countdown-unit{
       font-size: .55rem;
       margin-top: 4px;
@@ -291,7 +305,7 @@
     }
 
     /* Sections */
-    .section{ padding: 88px 0; }
+    .section{ padding: 88px 0; position: relative; z-index: 1; }
     .section-bg{ background: var(--white); }
     .section-head{ text-align:center; margin-bottom: 44px; }
     .section-title{
@@ -401,10 +415,6 @@
       margin: 0 0 12px;
       color: var(--muted);
       font-weight: 600;
-    }
-    .accord-body .event{
-      margin-top: 12px;
-      background: rgba(255,255,255,.88);
     }
 
     /* Gallery */
@@ -547,7 +557,7 @@
       color: rgba(255,255,255,.86);
       padding: 52px 0 34px;
       position: relative;
-      z-index: 3; /* above hearts */
+      z-index: 3;
     }
     .footer .brand{
       font-family:"Playfair Display", serif;
@@ -654,10 +664,7 @@
       background: linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.60));
       z-index:0;
     }
-    .invite-content{
-      position: relative;
-      z-index:1;
-    }
+    .invite-content{ position: relative; z-index:1; }
     .invite-badge{
       display:inline-flex;
       align-items:center;
@@ -692,6 +699,19 @@
       gap: 10px;
       justify-content:center;
     }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-weight: 600;
+      font-size: .96rem;
+      backdrop-filter: blur(10px);
+    }
     .invite-actions{
       padding: 18px 18px 20px;
       display:flex;
@@ -701,10 +721,7 @@
       border-top: 1px solid rgba(255,255,255,.14);
       flex-wrap: wrap;
     }
-    .invite-actions .btn-primary{
-      min-width: 240px;
-      flex: 0 1 auto;
-    }
+    .invite-actions .btn-primary{ min-width: 240px; flex: 0 1 auto; }
     .invite-actions .btn-ghost{
       color: rgba(255,255,255,.92);
       background: rgba(255,255,255,.10);
@@ -726,7 +743,7 @@
     .invite-actions .btn-ghost:hover{ background: rgba(255,255,255,.16); transform: translateY(-1px); }
     .invite-hidden{ display:none; }
 
-    /* ✅ RSVP PASS "screenshot" content */
+    /* RSVP PASS overlay */
     .pass-wrap{
       background: rgba(255,255,255,.92);
       padding: 14px;
@@ -771,24 +788,22 @@
       text-shadow: 0 16px 36px rgba(0,0,0,.35);
       margin-bottom: 6px;
     }
-    .pass-date{
-      font-weight: 800;
-      letter-spacing: .3px;
-      opacity: .95;
-    }
-    .pass-body{
-      padding: 14px 14px 12px;
-    }
-    .pass-greeting{
+    .pass-date{ font-weight: 800; letter-spacing: .3px; opacity: .95; }
+    .pass-body{ padding: 14px 14px 12px; }
+    .pass-greeting{ font-weight: 900; color: rgba(31,36,48,.92); margin-bottom: 8px; }
+    .pass-message{ color: rgba(31,36,48,.78); font-weight: 600; line-height: 1.45; }
+
+    .pass-status{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(138,79,179,.14);
+      background: rgba(201,167,216,.14);
+      color: rgba(31,36,48,.82);
       font-weight: 900;
-      color: rgba(31,36,48,.92);
-      margin-bottom: 8px;
+      text-align:center;
     }
-    .pass-message{
-      color: rgba(31,36,48,.78);
-      font-weight: 600;
-      line-height: 1.45;
-    }
+
     .pass-line{
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(138,79,179,.20), transparent);
@@ -836,10 +851,7 @@
       border-top: 1px solid rgba(255,255,255,.14);
       flex-wrap: wrap;
     }
-    .pass-actions .btn-primary{
-      min-width: 240px;
-      flex: 0 1 auto;
-    }
+    .pass-actions .btn-primary{ min-width: 240px; flex: 0 1 auto; }
 
     /* Responsive */
     @media (max-width: 980px){
@@ -873,10 +885,6 @@
       .grid{ grid-template-columns: 1fr; }
     }
 
-    @media (prefers-reduced-motion: reduce){
-      *{ scroll-behavior: auto !important; transition: none !important; }
-    }
-
     /* Toast */
     .toast{
       position: fixed;
@@ -890,20 +898,8 @@
       padding: 12px 14px;
       box-shadow: var(--shadow);
       display:none;
-      z-index: 2000;
+      z-index: 4000;
       max-width: min(520px, calc(100% - 28px));
-      font-weight: 700;
-      text-align:center;
-    }
-
-    /* Small helper note on pass */
-    .pass-email-note{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(138,79,179,.14);
-      background: rgba(201,167,216,.14);
-      color: rgba(31,36,48,.82);
       font-weight: 800;
       text-align:center;
     }
@@ -914,13 +910,19 @@
   <!-- Ambient hearts layer -->
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
-  <!-- Background Music (PUT YOUR FILE in repo, e.g. bg-music.mp3) -->
+  <!-- Background Music (PUT bg-music.mp3 in repo) -->
   <audio class="bg-audio" id="bgMusic" preload="auto" loop>
-    <!-- ✅ change file name if needed -->
     <source src="bg-music.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- INVITATION OVERLAY (shows first ALWAYS, no auto-skip) -->
+  <!-- Music control chip (fix for autoplay restrictions) -->
+  <div class="music-chip" id="musicChip" aria-label="Music Controls">
+    <button type="button" id="musicBtn"><i class="fa-solid fa-play"></i> Play Music</button>
+    <input id="musicVol" type="range" min="0" max="100" value="35" aria-label="Volume">
+    <div class="hint" id="musicHint">Tap play once (browser blocks autoplay).</div>
+  </div>
+
+  <!-- INVITATION OVERLAY -->
   <section class="invite-overlay" id="inviteOverlay" aria-label="Wedding Invitation">
     <div class="invite-card" role="dialog" aria-modal="true" aria-labelledby="inviteTitle">
       <div class="invite-hero">
@@ -955,7 +957,7 @@
     </div>
   </section>
 
-  <!-- ✅ RSVP PASS OVERLAY (shows after submit) -->
+  <!-- ✅ RSVP PASS OVERLAY -->
   <section class="invite-overlay invite-hidden" id="rsvpPassOverlay" aria-label="RSVP Invitation Pass">
     <div class="invite-card" role="dialog" aria-modal="true" aria-labelledby="rsvpPassTitle">
       <div class="invite-hero">
@@ -969,7 +971,6 @@
             Screenshot This Invitation
           </h2>
 
-          <!-- ✅ Personalized + email note will be added here -->
           <p class="invite-sub" id="passTopMsg">
             Please take a screenshot now. This will serve as your invitation upon entry.
           </p>
@@ -1002,9 +1003,7 @@
               Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.
             </div>
 
-            <div class="pass-email-note" id="emailNote" style="display:none;">
-              <i class="fa-solid fa-envelope"></i> Invitation has been sent to your email.
-            </div>
+            <div class="pass-status" id="emailStatus" style="display:none;"></div>
 
             <div class="pass-line"></div>
 
@@ -1136,7 +1135,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
   <hr class="soft-divider">
 
-  <!-- DETAILS (UPDATED: dropdown + moved Guest Guidelines & Essentials here) -->
+  <!-- DETAILS -->
   <section class="section" id="details">
     <div class="container">
       <div class="section-head">
@@ -1144,7 +1143,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       </div>
 
       <div class="details-accordion" aria-label="Details dropdowns">
-        <!-- Wedding Details dropdown -->
         <details class="accord" open>
           <summary>
             <span class="accord-title"><i class="fa-solid fa-ring"></i> Wedding Details</span>
@@ -1199,7 +1197,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
           </div>
         </details>
 
-        <!-- Guest Guidelines dropdown -->
         <details class="accord">
           <summary>
             <span class="accord-title"><i class="fa-solid fa-clipboard-list"></i> Guest Guidelines</span>
@@ -1207,9 +1204,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
           </summary>
           <div class="accord-body">
             <div class="event" style="margin-top:0;">
-              <div class="event-time">
-                <div class="tag">Kind Reminder</div>
-              </div>
+              <div class="event-time"><div class="tag">Kind Reminder</div></div>
               <div class="event-body">
                 <p><b>Late Arrivals:</b> If you arrive after the ceremony has started, please do not enter or take a seat. To avoid disruption, kindly wait quietly outside or in your car until the ceremony concludes.</p><br>
                 <p><b>Extra Guests:</b> We are unable to accommodate additional guests beyond those listed on your invitation. Please respect the assigned number of seats, as we wish to keep this celebration intimate.</p><br>
@@ -1221,7 +1216,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
           </div>
         </details>
 
-        <!-- Essentials dropdown -->
         <details class="accord">
           <summary>
             <span class="accord-title"><i class="fa-solid fa-circle-info"></i> Essentials</span>
@@ -1229,9 +1223,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
           </summary>
           <div class="accord-body">
             <div class="event" style="margin-top:0;">
-              <div class="event-time">
-                <div class="tag">What to Know</div>
-              </div>
+              <div class="event-time"><div class="tag">What to Know</div></div>
               <div class="event-body">
                 <p><b>Dress Code:</b> Shades of lilac and grey</p>
                 <p>• Gents: Polo (long or short sleeves) with slacks<br>
@@ -1267,18 +1259,10 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       </div>
 
       <div class="gallery-grid" aria-label="Photo gallery">
-        <figure class="gallery-item">
-          <img src="1.jpg" alt="Engagement Photo">
-        </figure>
-        <figure class="gallery-item">
-          <img src="2.jpg" alt="Travel Together">
-        </figure>
-        <figure class="gallery-item">
-          <img src="3.jpg" alt="Proposal Moment">
-        </figure>
-        <figure class="gallery-item">
-          <img src="4.jpg" alt="Portrait">
-        </figure>
+        <figure class="gallery-item"><img src="1.jpg" alt="Engagement Photo"></figure>
+        <figure class="gallery-item"><img src="2.jpg" alt="Travel Together"></figure>
+        <figure class="gallery-item"><img src="3.jpg" alt="Proposal Moment"></figure>
+        <figure class="gallery-item"><img src="4.jpg" alt="Portrait"></figure>
       </div>
     </div>
   </section>
@@ -1301,8 +1285,8 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
         <div class="rsvp-form">
           <form id="weddingRsvp"
-                action="https://script.google.com/macros/s/AKfycbw90TlU8tMKdK_g9kgOE2Vpd6U7Jx7F-eMpJ6gvsF9_CnJmyT1QBteGlKR56Wrj2RMB/exec"
-                method="POST">
+            action="https://script.google.com/macros/s/AKfycbw90TlU8tMKdK_g9kgOE2Vpd6U7Jx7F-eMpJ6gvsF9_CnJmyT1QBteGlKR56Wrj2RMB/exec"
+            method="POST">
 
             <div class="grid">
               <div class="form-group">
@@ -1310,7 +1294,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
                 <input id="name" type="text" name="name" placeholder="e.g., Juan Dela Cruz" required>
               </div>
 
-              <!-- ✅ Email now optional (only sends if provided) -->
               <div class="form-group">
                 <label for="email">Email Address (optional)</label>
                 <input id="email" type="email" name="email" placeholder="e.g., juan@email.com">
@@ -1368,17 +1351,10 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       <div class="brand">Manel &amp; Ryan</div>
       <p>Thank you for being part of our journey. We can’t wait to celebrate with you on our special day.</p>
 
-      <!-- ✅ Updated links -->
       <div class="social-links" aria-label="Social links">
-        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
+        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
         <a href="#home" class="social-icon" aria-label="Back to top"><i class="fas fa-heart"></i></a>
       </div>
 
@@ -1389,66 +1365,31 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     </div>
   </footer>
 
-  <!-- FAB -->
-  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
+  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
   <div class="toast" id="toast"></div>
 
   <script>
-    // =========================
-    // Background music autoplay
-    // =========================
-    // Browsers often block autoplay with sound until user interacts.
-    // This tries on load, then guarantees play on first click/tap/scroll.
-    const bgMusic = document.getElementById("bgMusic");
-    let musicStarted = false;
-
-    async function tryPlayMusic(){
-      if (!bgMusic || musicStarted) return;
-      try{
-        bgMusic.volume = 0.35; // gentle
-        await bgMusic.play();
-        musicStarted = true;
-      }catch(_){
-        // blocked - will start on first interaction
-      }
-    }
-
-    // Start attempt ASAP
-    window.addEventListener("load", tryPlayMusic);
-    // Start on first user interaction (reliable)
-    ["click","touchstart","keydown","scroll"].forEach(evt=>{
-      window.addEventListener(evt, tryPlayMusic, { once:true, passive:true });
-    });
-
-    // =========================
-    // Elegant hearts (continuous)
-    // =========================
+    // ===== Hearts continuous =====
     const heartsLayer = document.getElementById("heartsLayer");
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function spawnHeart(){
       if (!heartsLayer || reduceMotion) return;
-
       const heart = document.createElement("div");
       heart.className = "heart";
-      // mix of icons for a subtle elegant feel
       const variants = ["\u2665", "\u2661", "\u2764"];
       heart.textContent = variants[Math.floor(Math.random() * variants.length)];
 
-      const x = Math.random() * 100;                 // %
-      const size = 14 + Math.random() * 14;          // px
-      const drift = (-40 + Math.random() * 80);      // px
-      const duration = 7 + Math.random() * 5;        // seconds
+      const x = Math.random() * 100;
+      const size = 14 + Math.random() * 14;
+      const drift = (-40 + Math.random() * 80);
+      const duration = 7 + Math.random() * 5;
 
       heart.style.setProperty("--x", x + "%");
       heart.style.setProperty("--s", size + "px");
       heart.style.setProperty("--drift", drift + "px");
       heart.style.setProperty("--d", duration + "s");
 
-      // very soft color variation
       const colors = ["rgba(201,167,216,.85)", "rgba(138,79,179,.65)", "rgba(255,255,255,.75)"];
       heart.style.color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -1456,28 +1397,67 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       heart.addEventListener("animationend", () => heart.remove());
     }
 
-    // spawn rate: elegant & simple
     if (!reduceMotion){
       setInterval(spawnHeart, 520);
-      // small burst on load
       for (let i=0;i<6;i++) setTimeout(spawnHeart, i*180);
     }
 
-    // =========================
-    // Mobile menu
-    // =========================
+    // ===== Music (fix autoplay restriction) =====
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const musicVol = document.getElementById("musicVol");
+    const musicHint = document.getElementById("musicHint");
+
+    function setMusicUi(isPlaying){
+      musicBtn.innerHTML = isPlaying
+        ? '<i class="fa-solid fa-pause"></i> Pause'
+        : '<i class="fa-solid fa-play"></i> Play Music';
+      musicHint.textContent = isPlaying ? "Playing" : "Tap play once (browser blocks autoplay).";
+    }
+
+    function setVolFromSlider(){
+      const v = Math.max(0, Math.min(100, parseInt(musicVol.value, 10) || 0));
+      bgMusic.volume = v / 100;
+    }
+    setVolFromSlider();
+    musicVol.addEventListener("input", setVolFromSlider);
+
+    async function playMusic(){
+      try{
+        setVolFromSlider();
+        await bgMusic.play();
+        setMusicUi(true);
+      }catch(err){
+        // Most common cause: file missing or autoplay blocked without interaction
+        setMusicUi(false);
+        showToast("Music couldn't start. Make sure bg-music.mp3 exists in your GitHub repo.");
+      }
+    }
+    function pauseMusic(){
+      bgMusic.pause();
+      setMusicUi(false);
+    }
+
+    musicBtn.addEventListener("click", async () => {
+      if (bgMusic.paused) await playMusic();
+      else pauseMusic();
+    });
+
+    // Try preload check (helps identify missing file)
+    bgMusic.addEventListener("error", () => {
+      showToast("Music file not found. Upload bg-music.mp3 to your repo (same folder as index.html).");
+    });
+
+    // ===== Mobile menu =====
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const navLinks = document.getElementById("navLinks");
-
     mobileMenuBtn.addEventListener("click", () => {
       const open = navLinks.classList.toggle("active");
       mobileMenuBtn.setAttribute("aria-expanded", String(open));
       mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
-    // =========================
-    // Invitation overlay open/close
-    // =========================
+    // ===== Invitation overlay =====
     const inviteOverlay = document.getElementById("inviteOverlay");
     const enterSiteBtn = document.getElementById("enterSiteBtn");
     const closeInviteBtn = document.getElementById("closeInviteBtn");
@@ -1487,18 +1467,21 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       inviteOverlay.classList.remove("invite-hidden");
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
-      tryPlayMusic();
     }
     function hideInvite(){
       inviteOverlay.classList.add("invite-hidden");
       document.body.style.overflow = "";
-      tryPlayMusic();
     }
 
     // Always show invite on load
     document.body.style.overflow = "hidden";
 
-    enterSiteBtn.addEventListener("click", () => hideInvite());
+    // Start music on "View Details" (user gesture -> allowed)
+    enterSiteBtn.addEventListener("click", async () => {
+      hideInvite();
+      if (bgMusic.paused) await playMusic();
+    });
+
     closeInviteBtn.addEventListener("click", () => hideInvite());
     inviteOverlay.addEventListener("click", (e) => { if (e.target === inviteOverlay) hideInvite(); });
 
@@ -1509,9 +1492,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       showInvite();
     });
 
-    // =========================
-    // ✅ RSVP PASS overlay controls
-    // =========================
+    // ===== RSVP Pass overlay =====
     const rsvpPassOverlay = document.getElementById("rsvpPassOverlay");
     const closeRsvpPassBtn = document.getElementById("closeRsvpPassBtn");
 
@@ -1520,13 +1501,12 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     const passMessage = document.getElementById("passMessage");
     const passGuestsChip = document.getElementById("passGuestsChip");
     const passFooter = document.getElementById("passFooter");
-    const emailNote = document.getElementById("emailNote");
+    const emailStatus = document.getElementById("emailStatus");
 
     function showRsvpPass(){
       rsvpPassOverlay.classList.remove("invite-hidden");
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
-      tryPlayMusic();
     }
     function hideRsvpPass(){
       rsvpPassOverlay.classList.add("invite-hidden");
@@ -1535,9 +1515,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     closeRsvpPassBtn.addEventListener("click", hideRsvpPass);
     rsvpPassOverlay.addEventListener("click", (e) => { if (e.target === rsvpPassOverlay) hideRsvpPass(); });
 
-    // =========================
     // Smooth scrolling closes overlays
-    // =========================
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -1560,9 +1538,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       });
     });
 
-    // =========================
-    // Countdown
-    // =========================
+    // ===== Countdown =====
     const weddingDate = new Date("April 9, 2026 15:00:00").getTime();
     const $days = document.getElementById("days");
     const $hours = document.getElementById("hours");
@@ -1596,18 +1572,12 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // =========================
-    // Back-to-top FAB
-    // =========================
+    // ===== Back-to-top FAB =====
     const fab = document.getElementById("fab");
-    window.addEventListener("scroll", () => {
-      fab.style.display = window.scrollY > 520 ? "flex" : "none";
-    });
+    window.addEventListener("scroll", () => { fab.style.display = window.scrollY > 520 ? "flex" : "none"; });
     fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    // =========================
-    // Toast
-    // =========================
+    // ===== Toast =====
     const toast = document.getElementById("toast");
     function showToast(msg){
       toast.textContent = msg;
@@ -1616,13 +1586,10 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       showToast._t = setTimeout(() => toast.style.display = "none", 4200);
     }
 
-    // =========================
-    // RSVP submission + email sending
-    // =========================
+    // ===== RSVP submission =====
     const form = document.getElementById("weddingRsvp");
     const submitBtn = document.getElementById("submitBtn");
 
-    // normalize guests label
     function formatGuests(val){
       const n = parseInt(val, 10);
       if (!Number.isFinite(n)) return "—";
@@ -1631,12 +1598,15 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       return n + " persons";
     }
 
-    // IMPORTANT:
-    // - GitHub Pages cannot send emails by itself.
-    // - This code triggers an email via your Google Apps Script.
-    // - You MUST update your Apps Script to send email when "email" is present.
-    //
-    // Minimal Apps Script idea (server-side) at the bottom of this file as comment.
+    // We expect Apps Script to return JSON like:
+    // { ok:true, emailed:true/false, email:"...", message:"..." }
+    async function postToAppsScript(fd){
+      const res = await fetch(form.action, { method: "POST", body: fd });
+      const text = await res.text();
+
+      // Try parse JSON
+      try { return JSON.parse(text); } catch(_){ return { ok: true, raw: text }; }
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1648,57 +1618,56 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       try{
         const fd = new FormData(form);
 
-        // If email is empty, do NOT send (as requested):
-        // We'll still submit RSVP, but we'll blank out the email so server can skip email sending.
+        const name = (fd.get("name") || "").toString().trim() || "Guest";
         const rawEmail = (fd.get("email") || "").toString().trim();
         const email = rawEmail.length ? rawEmail : "";
-
-        if (!email){
-          fd.set("email", ""); // keep empty to skip sending
-        }
-
-        // Submit to Apps Script
-        await fetch(form.action, { method: "POST", body: fd });
-
-        const name = (fd.get("name") || "").toString().trim() || "Guest";
         const guestsVal = (fd.get("guests") || "").toString().trim();
         const guestsLabel = formatGuests(guestsVal);
 
         const attendance = (fd.get("attendance") || "").toString();
         const accepted = attendance.toLowerCase().includes("yes");
 
-        // Email note on pass
-        emailNote.style.display = email ? "block" : "none";
+        // If email empty, keep it empty (Apps Script will not send)
+        if (!email) fd.set("email", "");
+
+        const result = await postToAppsScript(fd);
+
+        // Prepare email status message
+        emailStatus.style.display = "block";
+
+        if (email){
+          // If Apps Script correctly returns emailed:true, show success
+          if (result && result.emailed === true){
+            emailStatus.innerHTML = '<i class="fa-solid fa-envelope"></i> Invitation has been sent to your email.';
+          } else {
+            // if not returned or false
+            emailStatus.innerHTML =
+              '<i class="fa-solid fa-triangle-exclamation"></i> RSVP saved, but email was NOT confirmed. (Fix Apps Script email sending.)';
+          }
+        } else {
+          emailStatus.innerHTML = '<i class="fa-solid fa-circle-info"></i> No email provided, so no email was sent.';
+        }
 
         if (accepted){
           passTopMsg.textContent =
             email
-              ? `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance. An invitation has been sent to your email as well.`
+              ? `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`
               : `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
 
           passGreeting.textContent = `Hi ${name}!`;
-          passMessage.textContent =
-            `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
-
+          passMessage.textContent = `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
           passGuestsChip.innerHTML = `<i class="fa-solid fa-users"></i> Guests: ${guestsLabel}`;
           passFooter.textContent = `Name: ${name} • Entry is for ${guestsLabel}.`;
 
           showRsvpPass();
-
-          showToast(
-            email
-              ? `Thank you, ${name}! RSVP confirmed. Invitation sent to email and your pass is ready to screenshot.`
-              : `Thank you, ${name}! RSVP confirmed. Please screenshot your invitation pass.`
-          );
+          showToast(email ? `Thank you, ${name}! RSVP confirmed. Check your email (if enabled).` : `Thank you, ${name}! RSVP confirmed. Screenshot your pass.`);
         } else {
           showToast(`Thank you, ${name}. Your response has been received.`);
         }
 
         form.reset();
       }catch(err){
-        showToast("We couldn’t send your RSVP via this page. Submitting normally...");
-        form.submit();
-        return;
+        showToast("RSVP submission failed. Please try again.");
       }finally{
         submitBtn.disabled = false;
         submitBtn.style.opacity = "1";
@@ -1709,44 +1678,91 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
   <!--
   ============================================================
-  ✅ SERVER-SIDE EMAIL SENDING (Google Apps Script) - IMPORTANT
+  ✅ REQUIRED: UPDATE YOUR GOOGLE APPS SCRIPT (EMAIL SENDING)
   ============================================================
 
-  GitHub Pages cannot send email directly from JavaScript.
-  You MUST add email sending in your Apps Script web app:
+  If you don't update Apps Script, NO EMAIL will arrive.
 
-  Example (replace YOUR SHEET logic, keep your existing doPost):
-  ------------------------------------------------------------
+  In Apps Script editor, replace your code with something like below:
+
   function doPost(e) {
-    var data = e.parameter; // name, email, guests, attendance, message...
-    // ... save to sheet ...
-
-    // Send email ONLY if email is provided:
-    if (data.email && data.email.trim() !== "") {
-      var subject = "Manel & Ryan Wedding Invitation Confirmation";
-      var body =
-        "Hi " + (data.name || "Guest") + ",\n\n" +
-        "Thank you for your RSVP.\n\n" +
-        "Wedding: April 9, 2026 • 2:00 PM\n" +
-        "Venue: Moraville The Garden, Palestina, Pili, Camarines Sur\n" +
-        "Guests: " + (data.guests || "-") + "\n" +
-        "Attendance: " + (data.attendance || "-") + "\n\n" +
-        "Please keep a screenshot of your invitation pass from the website.\n\n" +
-        "With love,\nManel & Ryan";
-
-      MailApp.sendEmail(data.email.trim(), subject, body);
+  try {
+    if (!e || !e.parameter) {
+      return jsonResponse({ ok: false, error: "Missing form data." });
     }
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-  ------------------------------------------------------------
+    const sheet = SpreadsheetApp
+      .openById("1ck7eho99ZUX59wjdrqsHVOva4bJHxGsV9PLfGaHSM7A")
+      .getActiveSheet();
 
-  Also ensure your deployment is set to:
-  Deploy > New deployment > Web app
-  - Execute as: Me
-  - Who has access: Anyone
+    const name = (e.parameter.name || "").toString().trim();
+    const email = (e.parameter.email || "").toString().trim();
+    const guests = (e.parameter.guests || "").toString().trim();
+    const attendance = (e.parameter.attendance || "").toString().trim();
+    const message = (e.parameter.message || "").toString().trim();
+
+    // Save to sheet
+    sheet.appendRow([
+      new Date(),
+      name,
+      email,
+      guests,
+      attendance,
+      message
+    ]);
+
+    // Send email only if provided + looks valid
+    let emailed = false;
+    if (email && isValidEmail_(email)) {
+      const subject = "Manel & Ryan — RSVP Confirmation";
+
+      const body =
+        `Hi ${name || "Guest"},\n\n` +
+        `Thank you for your RSVP.\n\n` +
+        `Details:\n` +
+        `• Wedding Date: April 9, 2026\n` +
+        `• Time: 3:00 PM\n` +
+        `• Venue: Moraville The Garden, Palestina, Pili, Camarines Sur\n\n` +
+        `Your RSVP:\n` +
+        `• Attendance: ${attendance || "-"}\n` +
+        `• Guests: ${guests || "-"}\n` +
+        (message ? `• Message: ${message}\n\n` : `\n`) +
+        `Please keep a screenshot of your invitation pass from the website.\n\n` +
+        `With love,\nManel & Ryan`;
+
+      // Sends from your Google account (the one owning this script)
+      MailApp.sendEmail(email, subject, body);
+      emailed = true;
+    }
+
+    // Return JSON to website so it can display "Email sent" accurately
+    return jsonResponse({
+      ok: true,
+      emailed: emailed,
+      email: email || "",
+      name: name || "Guest"
+    });
+
+  } catch (err) {
+    return jsonResponse({
+      ok: false,
+      error: (err && err.message) ? err.message : String(err)
+    });
+  }
+}
+
+// Helper: return JSON
+function jsonResponse(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Helper: basic email validation
+function isValidEmail_(email) {
+  // simple but effective validation
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
   -->
 </body>
 </html>
