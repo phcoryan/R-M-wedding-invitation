@@ -20,7 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ✅ Font Awesome (icons) - updated to 6.5.0 for better brand icon support -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
 
   <style>
     :root{
@@ -793,6 +795,7 @@
     .pass-greeting{ font-weight: 900; color: rgba(31,36,48,.92); margin-bottom: 8px; }
     .pass-message{ color: rgba(31,36,48,.78); font-weight: 600; line-height: 1.45; }
 
+    /* ✅ Removed email status styling hook stays but hidden and unused */
     .pass-status{
       margin-top: 10px;
       padding: 10px 12px;
@@ -1003,6 +1006,7 @@
               Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.
             </div>
 
+            <!-- ✅ REMOVED: email status display -->
             <div class="pass-status" id="emailStatus" style="display:none;"></div>
 
             <div class="pass-line"></div>
@@ -1050,7 +1054,7 @@
     </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
-      <i class="fas fa-bars"></i>
+      <i class="fa-solid fa-bars"></i>
     </button>
   </nav>
 
@@ -1294,10 +1298,11 @@ There, in front of everyone they loved, he revealed the secret he had been carry
                 <input id="name" type="text" name="name" placeholder="e.g., Juan Dela Cruz" required>
               </div>
 
-              <div class="form-group">
+              <!-- ✅ REMOVED EMAIL FIELD -->
+              <!-- <div class="form-group">
                 <label for="email">Email Address (optional)</label>
                 <input id="email" type="email" name="email" placeholder="e.g., juan@email.com">
-              </div>
+              </div> -->
 
               <div class="form-group">
                 <label for="guests">Number of Guests *</label>
@@ -1352,20 +1357,28 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       <p>Thank you for being part of our journey. We can’t wait to celebrate with you on our special day.</p>
 
       <div class="social-links" aria-label="Social links">
-        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <a href="#home" class="social-icon" aria-label="Back to top"><i class="fas fa-heart"></i></a>
+        <!-- ✅ FIXED: use FA6 brand icons -->
+        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+        <!-- ✅ REMOVED: Email icon/button -->
+        <!-- <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a> -->
+
+        <a href="#home" class="social-icon" aria-label="Back to top"><i class="fa-solid fa-heart"></i></a>
       </div>
 
       <div class="copyright">
-        <div>© 2026 Manel &amp; Ryan’s Wedding • Made with <i class="fas fa-heart" style="color: var(--lilac);"></i></div>
+        <div>© 2026 Manel &amp; Ryan’s Wedding • Made with <i class="fa-solid fa-heart" style="color: var(--lilac);"></i></div>
         <div style="margin-top:8px;">Share this link with guests: <span style="color: rgba(255,255,255,.75);">https://phcoryan.github.io/R-M-wedding-invitation/</span></div>
       </div>
     </div>
   </footer>
 
-  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
+  <button class="fab" id="fab" title="Back to Top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
   <div class="toast" id="toast"></div>
 
   <script>
@@ -1428,7 +1441,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
         await bgMusic.play();
         setMusicUi(true);
       }catch(err){
-        // Most common cause: file missing or autoplay blocked without interaction
         setMusicUi(false);
         showToast("Music couldn't start. Make sure bg-music.mp3 exists in your GitHub repo.");
       }
@@ -1443,7 +1455,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       else pauseMusic();
     });
 
-    // Try preload check (helps identify missing file)
     bgMusic.addEventListener("error", () => {
       showToast("Music file not found. Upload bg-music.mp3 to your repo (same folder as index.html).");
     });
@@ -1454,7 +1465,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     mobileMenuBtn.addEventListener("click", () => {
       const open = navLinks.classList.toggle("active");
       mobileMenuBtn.setAttribute("aria-expanded", String(open));
-      mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
     });
 
     // ===== Invitation overlay =====
@@ -1473,10 +1484,8 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       document.body.style.overflow = "";
     }
 
-    // Always show invite on load
     document.body.style.overflow = "hidden";
 
-    // Start music on "View Details" (user gesture -> allowed)
     enterSiteBtn.addEventListener("click", async () => {
       hideInvite();
       if (bgMusic.paused) await playMusic();
@@ -1488,7 +1497,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     openInviteBtn.addEventListener("click", () => {
       navLinks.classList.remove("active");
       mobileMenuBtn.setAttribute("aria-expanded", "false");
-      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
       showInvite();
     });
 
@@ -1501,7 +1510,6 @@ There, in front of everyone they loved, he revealed the secret he had been carry
     const passMessage = document.getElementById("passMessage");
     const passGuestsChip = document.getElementById("passGuestsChip");
     const passFooter = document.getElementById("passFooter");
-    const emailStatus = document.getElementById("emailStatus");
 
     function showRsvpPass(){
       rsvpPassOverlay.classList.remove("invite-hidden");
@@ -1530,7 +1538,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
         navLinks.classList.remove("active");
         mobileMenuBtn.setAttribute("aria-expanded", "false");
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
 
         const navOffset = 92;
         const top = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
@@ -1586,7 +1594,7 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       showToast._t = setTimeout(() => toast.style.display = "none", 4200);
     }
 
-    // ===== RSVP submission =====
+    // ===== RSVP submission (✅ removed email logic) =====
     const form = document.getElementById("weddingRsvp");
     const submitBtn = document.getElementById("submitBtn");
 
@@ -1598,13 +1606,9 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       return n + " persons";
     }
 
-    // We expect Apps Script to return JSON like:
-    // { ok:true, emailed:true/false, email:"...", message:"..." }
     async function postToAppsScript(fd){
       const res = await fetch(form.action, { method: "POST", body: fd });
       const text = await res.text();
-
-      // Try parse JSON
       try { return JSON.parse(text); } catch(_){ return { ok: true, raw: text }; }
     }
 
@@ -1619,48 +1623,26 @@ There, in front of everyone they loved, he revealed the secret he had been carry
         const fd = new FormData(form);
 
         const name = (fd.get("name") || "").toString().trim() || "Guest";
-        const rawEmail = (fd.get("email") || "").toString().trim();
-        const email = rawEmail.length ? rawEmail : "";
         const guestsVal = (fd.get("guests") || "").toString().trim();
         const guestsLabel = formatGuests(guestsVal);
 
         const attendance = (fd.get("attendance") || "").toString();
         const accepted = attendance.toLowerCase().includes("yes");
 
-        // If email empty, keep it empty (Apps Script will not send)
-        if (!email) fd.set("email", "");
+        // ✅ Ensure "email" is not sent at all (in case old Apps Script expects it)
+        fd.delete("email");
 
-        const result = await postToAppsScript(fd);
-
-        // Prepare email status message
-        emailStatus.style.display = "block";
-
-        if (email){
-          // If Apps Script correctly returns emailed:true, show success
-          if (result && result.emailed === true){
-            emailStatus.innerHTML = '<i class="fa-solid fa-envelope"></i> Invitation has been sent to your email.';
-          } else {
-            // if not returned or false
-            emailStatus.innerHTML =
-              '<i class="fa-solid fa-triangle-exclamation"></i> RSVP saved, but email was NOT confirmed. (Fix Apps Script email sending.)';
-          }
-        } else {
-          emailStatus.innerHTML = '<i class="fa-solid fa-circle-info"></i> No email provided, so no email was sent.';
-        }
+        await postToAppsScript(fd);
 
         if (accepted){
-          passTopMsg.textContent =
-            email
-              ? `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`
-              : `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
-
+          passTopMsg.textContent = `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
           passGreeting.textContent = `Hi ${name}!`;
           passMessage.textContent = `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
           passGuestsChip.innerHTML = `<i class="fa-solid fa-users"></i> Guests: ${guestsLabel}`;
           passFooter.textContent = `Name: ${name} • Entry is for ${guestsLabel}.`;
 
           showRsvpPass();
-          showToast(email ? `Thank you, ${name}! RSVP confirmed. Check your email (if enabled).` : `Thank you, ${name}! RSVP confirmed. Screenshot your pass.`);
+          showToast(`Thank you, ${name}! RSVP confirmed. Screenshot your pass.`);
         } else {
           showToast(`Thank you, ${name}. Your response has been received.`);
         }
@@ -1675,94 +1657,5 @@ There, in front of everyone they loved, he revealed the secret he had been carry
       }
     });
   </script>
-
-  <!--
-  ============================================================
-  ✅ REQUIRED: UPDATE YOUR GOOGLE APPS SCRIPT (EMAIL SENDING)
-  ============================================================
-
-  If you don't update Apps Script, NO EMAIL will arrive.
-
-  In Apps Script editor, replace your code with something like below:
-
-  function doPost(e) {
-  try {
-    if (!e || !e.parameter) {
-      return jsonResponse({ ok: false, error: "Missing form data." });
-    }
-
-    const sheet = SpreadsheetApp
-      .openById("1ck7eho99ZUX59wjdrqsHVOva4bJHxGsV9PLfGaHSM7A")
-      .getActiveSheet();
-
-    const name = (e.parameter.name || "").toString().trim();
-    const email = (e.parameter.email || "").toString().trim();
-    const guests = (e.parameter.guests || "").toString().trim();
-    const attendance = (e.parameter.attendance || "").toString().trim();
-    const message = (e.parameter.message || "").toString().trim();
-
-    // Save to sheet
-    sheet.appendRow([
-      new Date(),
-      name,
-      email,
-      guests,
-      attendance,
-      message
-    ]);
-
-    // Send email only if provided + looks valid
-    let emailed = false;
-    if (email && isValidEmail_(email)) {
-      const subject = "Manel & Ryan — RSVP Confirmation";
-
-      const body =
-        `Hi ${name || "Guest"},\n\n` +
-        `Thank you for your RSVP.\n\n` +
-        `Details:\n` +
-        `• Wedding Date: April 9, 2026\n` +
-        `• Time: 3:00 PM\n` +
-        `• Venue: Moraville The Garden, Palestina, Pili, Camarines Sur\n\n` +
-        `Your RSVP:\n` +
-        `• Attendance: ${attendance || "-"}\n` +
-        `• Guests: ${guests || "-"}\n` +
-        (message ? `• Message: ${message}\n\n` : `\n`) +
-        `Please keep a screenshot of your invitation pass from the website.\n\n` +
-        `With love,\nManel & Ryan`;
-
-      // Sends from your Google account (the one owning this script)
-      MailApp.sendEmail(email, subject, body);
-      emailed = true;
-    }
-
-    // Return JSON to website so it can display "Email sent" accurately
-    return jsonResponse({
-      ok: true,
-      emailed: emailed,
-      email: email || "",
-      name: name || "Guest"
-    });
-
-  } catch (err) {
-    return jsonResponse({
-      ok: false,
-      error: (err && err.message) ? err.message : String(err)
-    });
-  }
-}
-
-// Helper: return JSON
-function jsonResponse(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// Helper: basic email validation
-function isValidEmail_(email) {
-  // simple but effective validation
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-  -->
 </body>
 </html>
