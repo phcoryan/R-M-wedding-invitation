@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Manel & Ryan | Wedding</title>
+
   <!-- Facebook / Messenger Preview -->
   <meta property="og:title" content="Manel &amp; Ryan | Wedding">
   <meta property="og:description" content="Join us as we celebrate our wedding on April 9, 2026 • 3:00 PM at Moraville The Garden.">
   <meta property="og:url" content="https://phcoryan.github.io/R-M-wedding-invitation/">
   <meta property="og:type" content="website">
-
   <meta property="og:image" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
   <meta property="og:image:secure_url" content="https://phcoryan.github.io/R-M-wedding-invitation/theme.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,6 +68,43 @@
       background: linear-gradient(90deg, transparent, rgba(138,79,179,.18), transparent);
       border:0;
       margin: 0;
+    }
+
+    /* ===== Ambient Hearts ===== */
+    .hearts-layer{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2; /* above page, below overlays */
+      overflow:hidden;
+    }
+    .heart{
+      position: absolute;
+      left: var(--x, 50%);
+      bottom: -48px;
+      font-size: var(--s, 18px);
+      opacity: 0;
+      transform: translateX(-50%) translateY(0) scale(1);
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+      animation: floatUp var(--d, 8s) linear forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes floatUp{
+      0%   { opacity: 0; transform: translateX(-50%) translateY(0) scale(.95); }
+      10%  { opacity: .55; }
+      100% { opacity: 0; transform: translateX(calc(-50% + var(--drift, 0px))) translateY(calc(-100vh - 120px)) scale(1.15); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hearts-layer{ display:none !important; }
+    }
+
+    /* ===== Background music (hidden audio) ===== */
+    .bg-audio{
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events:none;
     }
 
     /* NAV */
@@ -314,6 +350,63 @@
     .event-body p{ color: var(--muted); margin: 0; }
     .event-body .meta{ margin-top: 10px; color: rgba(31,36,48,.78); font-weight: 600; font-size: .95rem; }
 
+    /* Details dropdown */
+    .details-accordion{
+      max-width: 980px;
+      margin: 0 auto;
+      display:grid;
+      gap: 14px;
+    }
+    details.accord{
+      border-radius: var(--radius-lg);
+      border: var(--border);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow-sm);
+      overflow:hidden;
+    }
+    details.accord summary{
+      list-style:none;
+      cursor:pointer;
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      user-select:none;
+      font-weight: 900;
+      color: rgba(31,36,48,.90);
+    }
+    details.accord summary::-webkit-details-marker{ display:none; }
+    .accord-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 900;
+    }
+    .accord-chevron{
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(138,79,179,.14);
+      background: rgba(201,167,216,.14);
+      color: var(--lilac-3);
+      transition: var(--transition);
+      flex: 0 0 auto;
+    }
+    details[open] .accord-chevron{ transform: rotate(180deg); }
+    .accord-body{ padding: 0 18px 18px; }
+    .accord-note{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .accord-body .event{
+      margin-top: 12px;
+      background: rgba(255,255,255,.88);
+    }
+
     /* Gallery */
     .gallery-grid{
       display:grid;
@@ -453,6 +546,8 @@
       background: #171a22;
       color: rgba(255,255,255,.86);
       padding: 52px 0 34px;
+      position: relative;
+      z-index: 3; /* above hearts */
     }
     .footer .brand{
       font-family:"Playfair Display", serif;
@@ -472,6 +567,7 @@
       justify-content:center;
       gap: 14px;
       margin-top: 22px;
+      flex-wrap: wrap;
     }
     .social-icon{
       width: 44px;
@@ -636,8 +732,6 @@
       padding: 14px;
       border-top: 1px solid rgba(255,255,255,.14);
     }
-
-    /* This is the actual "invitation card image" area to screenshot */
     .pass-card{
       border-radius: 18px;
       overflow: hidden;
@@ -801,10 +895,30 @@
       font-weight: 700;
       text-align:center;
     }
+
+    /* Small helper note on pass */
+    .pass-email-note{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(138,79,179,.14);
+      background: rgba(201,167,216,.14);
+      color: rgba(31,36,48,.82);
+      font-weight: 800;
+      text-align:center;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Ambient hearts layer -->
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <!-- Background Music (PUT YOUR FILE in repo, e.g. bg-music.mp3) -->
+  <audio class="bg-audio" id="bgMusic" preload="auto" loop>
+    <!-- ✅ change file name if needed -->
+    <source src="bg-music.mp3" type="audio/mpeg" />
+  </audio>
 
   <!-- INVITATION OVERLAY (shows first ALWAYS, no auto-skip) -->
   <section class="invite-overlay" id="inviteOverlay" aria-label="Wedding Invitation">
@@ -855,7 +969,7 @@
             Screenshot This Invitation
           </h2>
 
-          <!-- ✅ This line becomes personalized -->
+          <!-- ✅ Personalized + email note will be added here -->
           <p class="invite-sub" id="passTopMsg">
             Please take a screenshot now. This will serve as your invitation upon entry.
           </p>
@@ -873,7 +987,6 @@
           <i class="fa-solid fa-camera"></i> Screenshot the card below (this is your entry pass)
         </div>
 
-        <!-- ✅ This is the "invitation image" to screenshot, now includes name + guests -->
         <div class="pass-card" id="passCard">
           <div class="pass-cover">
             <div class="pass-cover-inner">
@@ -887,6 +1000,10 @@
 
             <div class="pass-message" id="passMessage">
               Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.
+            </div>
+
+            <div class="pass-email-note" id="emailNote" style="display:none;">
+              <i class="fa-solid fa-envelope"></i> Invitation has been sent to your email.
             </div>
 
             <div class="pass-line"></div>
@@ -929,7 +1046,7 @@
       <a href="#rsvp">RSVP</a>
 
       <button type="button" id="openInviteBtn" class="nav-invite">
-      <a>  <i class="fa-solid fa-envelope"></i> Invitation </a>
+        <span><i class="fa-solid fa-envelope"></i> Invitation</span>
       </button>
     </div>
 
@@ -1019,82 +1136,126 @@ There, in front of everyone they loved, he revealed the secret he had been carry
 
   <hr class="soft-divider">
 
-  <!-- DETAILS -->
+  <!-- DETAILS (UPDATED: dropdown + moved Guest Guidelines & Essentials here) -->
   <section class="section" id="details">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Wedding Details</h2>
-       <!-- <p class="section-subtitle">Please arrive a bit early so we can start on time.</p> -->
+        <h2 class="section-title">Details</h2>
       </div>
 
-      <div class="timeline" aria-label="Wedding program">
-        <div class="event">
-          <div class="event-time">
-            <div class="when">2:00 PM</div>
-           <div class="tag">Ceremony</div>
-          </div>
-          <div class="event-body">
-           <!--  <h3>Ceremony</h3> -->
-            <p>The ceremony will begin promptly at The Garden Dome. Please arrive at least 30 minutes early to allow time for seating</p>
-            <div class="meta"><strong>Location:</strong> Moraville The Garden, Palestina, Pili, Camarines Sur</div>
-          </div>
-        </div>
+      <div class="details-accordion" aria-label="Details dropdowns">
+        <!-- Wedding Details dropdown -->
+        <details class="accord" open>
+          <summary>
+            <span class="accord-title"><i class="fa-solid fa-ring"></i> Wedding Details</span>
+            <span class="accord-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="accord-body">
+            <p class="accord-note">Please arrive a bit early so we can start on time.</p>
 
-        <div class="event">
-          <div class="event-time">
-            <div class="when">3:30 PM</div>
-            <div class="tag">Refreshments</div>
-          </div>
-          <div class="event-body">
-           <!--  <h3>Cocktail Hour</h3> -->
-            <p>After the ceremony, enjoy appetizers and refreshments while the couple takes photographs. This is a lovely opportunity to connect with other guests and share conversations.</p>
-           <!--  <div class="meta"><strong>Location:</strong> Resort Terrace</div> -->
-          </div>
-        </div>
+            <div class="timeline" aria-label="Wedding program">
+              <div class="event">
+                <div class="event-time">
+                  <div class="when">2:00 PM</div>
+                  <div class="tag">Ceremony</div>
+                </div>
+                <div class="event-body">
+                  <p>The ceremony will begin promptly at The Garden Dome. Please arrive at least 30 minutes early to allow time for seating</p>
+                  <div class="meta"><strong>Location:</strong> Moraville The Garden, Palestina, Pili, Camarines Sur</div>
+                </div>
+              </div>
 
-        <div class="event">
-          <div class="event-time">
-            <div class="when">4:30 PM</div>
-            <div class="tag">Reception and Celebration Program</div>
-          </div>
-          <div class="event-body">
-            <!-- <h3>Reception</h3> -->
-            <p>The reception program will start after the couple’s post-nuptial shoot. Dinner will be served following the couple’s first dance.</p>
-            <div class="meta"><strong>Location:</strong> The Garden Dome</div>
-          </div>
-        </div>
+              <div class="event">
+                <div class="event-time">
+                  <div class="when">3:30 PM</div>
+                  <div class="tag">Refreshments</div>
+                </div>
+                <div class="event-body">
+                  <p>After the ceremony, enjoy appetizers and refreshments while the couple takes photographs. This is a lovely opportunity to connect with other guests and share conversations.</p>
+                </div>
+              </div>
 
-        <div class="event">
-          <div class="event-time">
-            <div class="when">6:00 PM</div>
-            <div class="tag">Program End</div>
+              <div class="event">
+                <div class="event-time">
+                  <div class="when">4:30 PM</div>
+                  <div class="tag">Reception and Celebration Program</div>
+                </div>
+                <div class="event-body">
+                  <p>The reception program will start after the couple’s post-nuptial shoot. Dinner will be served following the couple’s first dance.</p>
+                  <div class="meta"><strong>Location:</strong> The Garden Dome</div>
+                </div>
+              </div>
+
+              <div class="event">
+                <div class="event-time">
+                  <div class="when">6:00 PM</div>
+                  <div class="tag">Program End</div>
+                </div>
+                <div class="event-body">
+                  <p>The celebration will conclude by early evening. We hope you’ll stay until the program finishes so we can personally thank you for joining us.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="event-body">
-            <!-- <h3>After Party</h3> -->
-            <p>The celebration will conclude by early evening. We hope you’ll stay until the program finishes so we can personally thank you for joining us.</p>
-            <!-- <div class="meta"><strong>Location:</strong> Resort Lounge</div> -->
+        </details>
+
+        <!-- Guest Guidelines dropdown -->
+        <details class="accord">
+          <summary>
+            <span class="accord-title"><i class="fa-solid fa-clipboard-list"></i> Guest Guidelines</span>
+            <span class="accord-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="accord-body">
+            <div class="event" style="margin-top:0;">
+              <div class="event-time">
+                <div class="tag">Kind Reminder</div>
+              </div>
+              <div class="event-body">
+                <p><b>Late Arrivals:</b> If you arrive after the ceremony has started, please do not enter or take a seat. To avoid disruption, kindly wait quietly outside or in your car until the ceremony concludes.</p><br>
+                <p><b>Extra Guests:</b> We are unable to accommodate additional guests beyond those listed on your invitation. Please respect the assigned number of seats, as we wish to keep this celebration intimate.</p><br>
+                <p><b>Photos & Videos:</b> The ceremony is unplugged—please refrain from taking photos or videos during the vows. Our professional team will capture everything. After the couple is pronounced husband and wife, you may take photos, but please avoid blocking the view of our photographers. The reception will be open for personal photography.</p><br>
+                <p><b>Reception Seating:</b> Seating has been carefully arranged for everyone’s comfort. Kindly follow the assigned seating and enjoy the company prepared for you.</p><br>
+                <p><b>Parents & Guardians:</b> To keep the ceremony solemn, we kindly ask parents and guardians to take responsibility for their little ones—ensuring they stay close, are attended to, and avoid wandering or making noise during the ceremony. Your care helps everyone fully enjoy this special occasion.</p>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
+
+        <!-- Essentials dropdown -->
+        <details class="accord">
+          <summary>
+            <span class="accord-title"><i class="fa-solid fa-circle-info"></i> Essentials</span>
+            <span class="accord-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="accord-body">
+            <div class="event" style="margin-top:0;">
+              <div class="event-time">
+                <div class="tag">What to Know</div>
+              </div>
+              <div class="event-body">
+                <p><b>Dress Code:</b> Shades of lilac and grey</p>
+                <p>• Gents: Polo (long or short sleeves) with slacks<br>
+                  • Ladies: Long or cocktail dress<br>
+                  • Both: Any formal or semi-formal attire you feel comfortable in</p>
+                <br>
+                <p><b>Parking:</b><br>
+                  Parking is available at the venue. Please follow the signs and attendants for guidance.</p>
+                <br>
+                <p><b>Gifts:</b><br>
+                  With all that we have, we've been truly blessed. Your presence and prayers are all that we request. Yet if you desire to honor us nonetheless,
+                  A monetary gift is the one we suggest.</p>
+                <br>
+                <p><b>Contact:</b><br>
+                  For any concerns, you may reach us through our social accounts or at 0910 379 4050.</p>
+                <br>
+                <p><b>RSVP Reminder:</b><br>
+                  Please confirm your attendance by March 15 through this e-invitation. If your plans change, kindly inform us as soon as possible.</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
     </div>
-	
-		<div class="event">
-          <div class="event-time">
-            <!-- <div class="when">4:30 PM</div> -->
-            <div class="tag">Guest Guidelines</div>
-          </div>
-          <div class="event-body">
-            <!-- <h3>Reception</h3> -->
-            <p><b>Late Arrivals:</b> If you arrive after the ceremony has started, please do not enter or take a seat. To avoid disruption, kindly wait quietly outside or in your car until the ceremony concludes.</p><br>
-			<p><b>Extra Guests:</b> We are unable to accommodate additional guests beyond those listed on your invitation. Please respect the assigned number of seats, as we wish to keep this celebration intimate.</p><br>
-			<p><b>Photos & Videos:</b> The ceremony is unplugged—please refrain from taking photos or videos during the vows. Our professional team will capture everything. After the couple is pronounced husband and wife, you may take photos, but please avoid blocking the view of our photographers. The reception will be open for personal photography.</p><br>
-			<p><b>Reception Seating:</b> Seating has been carefully arranged for everyone’s comfort. Kindly follow the assigned seating and enjoy the company prepared for you.</p><br>
-			<p><b>Parents & Guardians:</b>
-To keep the ceremony solemn, we kindly ask parents and guardians to take responsibility for their little ones—ensuring they stay close, are attended to, and avoid wandering or making noise during the ceremony. Your care helps everyone fully enjoy this special occasion.</p>
-			
-            <!-- <div class="meta"><strong>Location:</strong> The Garden Dome</div> -->
-          </div>
-        </div>
   </section>
 
   <!-- GALLERY -->
@@ -1149,9 +1310,10 @@ To keep the ceremony solemn, we kindly ask parents and guardians to take respons
                 <input id="name" type="text" name="name" placeholder="e.g., Juan Dela Cruz" required>
               </div>
 
+              <!-- ✅ Email now optional (only sends if provided) -->
               <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input id="email" type="email" name="email" placeholder="e.g., juan@email.com" required>
+                <label for="email">Email Address (optional)</label>
+                <input id="email" type="email" name="email" placeholder="e.g., juan@email.com">
               </div>
 
               <div class="form-group">
@@ -1199,51 +1361,30 @@ To keep the ceremony solemn, we kindly ask parents and guardians to take respons
       </div>
     </div>
   </section>
-<!-- ESSENTIALS -->
-<div class="event">
-          <div class="event-time">
-            <!-- <div class="when">4:30 PM</div> -->
-            <div class="tag">Essentials</div>
-          </div>
-          <div class="event-body">
-            <!-- <h3>Reception</h3> -->
-            <p><b>Dress Code:</b>
-Shades of lilac and grey</p>
-			<p>• Gents: Polo (long or short sleeves) with slacks<br>
-• Ladies: Long or cocktail dress<br>
-• Both: Any formal or semi-formal attire you feel comfortable in</p>
-			<p><b>Parking</b><br>
-Parking is available at the venue. Please follow the signs and attendants for guidance.</p>
-			<p><b> Gifts</b><br>
- With all that we have, we've been truly blessed. Your presence and prayers are all that we request. Yet if you desire to honor us nonetheless,
-A monetary gift is the one we suggest.</p>
-			<p><b>Contact</b><br>
-For any concerns, you may reach us through our social accounts or at 0910 379 4050.</p>
-<p><b>RSVP Reminder</b><br>
-Please confirm your attendance by March 15
-through this e-invitation. If your plans change, kindly inform us as soon as possible.</p>
-			
-            <!-- <div class="meta"><strong>Location:</strong> The Garden Dome</div> -->
-          </div>
-        </div>
-		
-		
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="brand">Manel &amp; Ryan</div>
       <p>Thank you for being part of our journey. We can’t wait to celebrate with you on our special day.</p>
 
+      <!-- ✅ Updated links -->
       <div class="social-links" aria-label="Social links">
-        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/phcoryan/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/phcoryan/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="mailto:abcoran15@gmail.com" class="social-icon" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
         <a href="#home" class="social-icon" aria-label="Back to top"><i class="fas fa-heart"></i></a>
       </div>
 
       <div class="copyright">
         <div>© 2026 Manel &amp; Ryan’s Wedding • Made with <i class="fas fa-heart" style="color: var(--lilac);"></i></div>
-        <div style="margin-top:8px;">Share this link with guests: <span style="color: rgba(255,255,255,.75);">https://Manel-Ryan-wedding.com</span></div>
+        <div style="margin-top:8px;">Share this link with guests: <span style="color: rgba(255,255,255,.75);">https://phcoryan.github.io/R-M-wedding-invitation/</span></div>
       </div>
     </div>
   </footer>
@@ -1256,7 +1397,75 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
   <div class="toast" id="toast"></div>
 
   <script>
+    // =========================
+    // Background music autoplay
+    // =========================
+    // Browsers often block autoplay with sound until user interacts.
+    // This tries on load, then guarantees play on first click/tap/scroll.
+    const bgMusic = document.getElementById("bgMusic");
+    let musicStarted = false;
+
+    async function tryPlayMusic(){
+      if (!bgMusic || musicStarted) return;
+      try{
+        bgMusic.volume = 0.35; // gentle
+        await bgMusic.play();
+        musicStarted = true;
+      }catch(_){
+        // blocked - will start on first interaction
+      }
+    }
+
+    // Start attempt ASAP
+    window.addEventListener("load", tryPlayMusic);
+    // Start on first user interaction (reliable)
+    ["click","touchstart","keydown","scroll"].forEach(evt=>{
+      window.addEventListener(evt, tryPlayMusic, { once:true, passive:true });
+    });
+
+    // =========================
+    // Elegant hearts (continuous)
+    // =========================
+    const heartsLayer = document.getElementById("heartsLayer");
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function spawnHeart(){
+      if (!heartsLayer || reduceMotion) return;
+
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      // mix of icons for a subtle elegant feel
+      const variants = ["\u2665", "\u2661", "\u2764"];
+      heart.textContent = variants[Math.floor(Math.random() * variants.length)];
+
+      const x = Math.random() * 100;                 // %
+      const size = 14 + Math.random() * 14;          // px
+      const drift = (-40 + Math.random() * 80);      // px
+      const duration = 7 + Math.random() * 5;        // seconds
+
+      heart.style.setProperty("--x", x + "%");
+      heart.style.setProperty("--s", size + "px");
+      heart.style.setProperty("--drift", drift + "px");
+      heart.style.setProperty("--d", duration + "s");
+
+      // very soft color variation
+      const colors = ["rgba(201,167,216,.85)", "rgba(138,79,179,.65)", "rgba(255,255,255,.75)"];
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+      heartsLayer.appendChild(heart);
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+
+    // spawn rate: elegant & simple
+    if (!reduceMotion){
+      setInterval(spawnHeart, 520);
+      // small burst on load
+      for (let i=0;i<6;i++) setTimeout(spawnHeart, i*180);
+    }
+
+    // =========================
     // Mobile menu
+    // =========================
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const navLinks = document.getElementById("navLinks");
 
@@ -1266,7 +1475,9 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
+    // =========================
     // Invitation overlay open/close
+    // =========================
     const inviteOverlay = document.getElementById("inviteOverlay");
     const enterSiteBtn = document.getElementById("enterSiteBtn");
     const closeInviteBtn = document.getElementById("closeInviteBtn");
@@ -1276,10 +1487,12 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       inviteOverlay.classList.remove("invite-hidden");
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
+      tryPlayMusic();
     }
     function hideInvite(){
       inviteOverlay.classList.add("invite-hidden");
       document.body.style.overflow = "";
+      tryPlayMusic();
     }
 
     // Always show invite on load
@@ -1296,21 +1509,24 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       showInvite();
     });
 
+    // =========================
     // ✅ RSVP PASS overlay controls
+    // =========================
     const rsvpPassOverlay = document.getElementById("rsvpPassOverlay");
     const closeRsvpPassBtn = document.getElementById("closeRsvpPassBtn");
 
-    // ✅ Dynamic text placeholders
     const passTopMsg = document.getElementById("passTopMsg");
     const passGreeting = document.getElementById("passGreeting");
     const passMessage = document.getElementById("passMessage");
     const passGuestsChip = document.getElementById("passGuestsChip");
     const passFooter = document.getElementById("passFooter");
+    const emailNote = document.getElementById("emailNote");
 
     function showRsvpPass(){
       rsvpPassOverlay.classList.remove("invite-hidden");
       document.body.style.overflow = "hidden";
       window.scrollTo({ top: 0, behavior: "auto" });
+      tryPlayMusic();
     }
     function hideRsvpPass(){
       rsvpPassOverlay.classList.add("invite-hidden");
@@ -1319,7 +1535,9 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
     closeRsvpPassBtn.addEventListener("click", hideRsvpPass);
     rsvpPassOverlay.addEventListener("click", (e) => { if (e.target === rsvpPassOverlay) hideRsvpPass(); });
 
+    // =========================
     // Smooth scrolling closes overlays
+    // =========================
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -1342,7 +1560,9 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       });
     });
 
+    // =========================
     // Countdown
+    // =========================
     const weddingDate = new Date("April 9, 2026 15:00:00").getTime();
     const $days = document.getElementById("days");
     const $hours = document.getElementById("hours");
@@ -1376,18 +1596,19 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
+    // =========================
     // Back-to-top FAB
+    // =========================
     const fab = document.getElementById("fab");
     window.addEventListener("scroll", () => {
       fab.style.display = window.scrollY > 520 ? "flex" : "none";
     });
     fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    // RSVP submission
-    const form = document.getElementById("weddingRsvp");
+    // =========================
+    // Toast
+    // =========================
     const toast = document.getElementById("toast");
-    const submitBtn = document.getElementById("submitBtn");
-
     function showToast(msg){
       toast.textContent = msg;
       toast.style.display = "block";
@@ -1395,7 +1616,13 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       showToast._t = setTimeout(() => toast.style.display = "none", 4200);
     }
 
-    // ✅ helper: normalize guests label
+    // =========================
+    // RSVP submission + email sending
+    // =========================
+    const form = document.getElementById("weddingRsvp");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // normalize guests label
     function formatGuests(val){
       const n = parseInt(val, 10);
       if (!Number.isFinite(n)) return "—";
@@ -1403,6 +1630,13 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       if (n >= 5) return "5+ persons";
       return n + " persons";
     }
+
+    // IMPORTANT:
+    // - GitHub Pages cannot send emails by itself.
+    // - This code triggers an email via your Google Apps Script.
+    // - You MUST update your Apps Script to send email when "email" is present.
+    //
+    // Minimal Apps Script idea (server-side) at the bottom of this file as comment.
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1413,6 +1647,17 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
 
       try{
         const fd = new FormData(form);
+
+        // If email is empty, do NOT send (as requested):
+        // We'll still submit RSVP, but we'll blank out the email so server can skip email sending.
+        const rawEmail = (fd.get("email") || "").toString().trim();
+        const email = rawEmail.length ? rawEmail : "";
+
+        if (!email){
+          fd.set("email", ""); // keep empty to skip sending
+        }
+
+        // Submit to Apps Script
         await fetch(form.action, { method: "POST", body: fd });
 
         const name = (fd.get("name") || "").toString().trim() || "Guest";
@@ -1422,19 +1667,30 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
         const attendance = (fd.get("attendance") || "").toString();
         const accepted = attendance.toLowerCase().includes("yes");
 
+        // Email note on pass
+        emailNote.style.display = email ? "block" : "none";
+
         if (accepted){
-          // ✅ Fill the pass with attendee data
-          passTopMsg.textContent = `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
+          passTopMsg.textContent =
+            email
+              ? `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance. An invitation has been sent to your email as well.`
+              : `Hi ${name}! Thank you for accepting our invitation. Please screenshot the card below and present it at the entrance.`;
+
           passGreeting.textContent = `Hi ${name}!`;
           passMessage.textContent =
             `Thank you for accepting our invitation. Please screenshot this as this will serve as your invitation. Please present this at the entrance.`;
+
           passGuestsChip.innerHTML = `<i class="fa-solid fa-users"></i> Guests: ${guestsLabel}`;
           passFooter.textContent = `Name: ${name} • Entry is for ${guestsLabel}.`;
 
           showRsvpPass();
-          showToast(`Thank you, ${name}! RSVP confirmed. Please screenshot your invitation pass.`);
+
+          showToast(
+            email
+              ? `Thank you, ${name}! RSVP confirmed. Invitation sent to email and your pass is ready to screenshot.`
+              : `Thank you, ${name}! RSVP confirmed. Please screenshot your invitation pass.`
+          );
         } else {
-          // If they declined, don't show pass (but still confirm receipt)
           showToast(`Thank you, ${name}. Your response has been received.`);
         }
 
@@ -1450,5 +1706,47 @@ through this e-invitation. If your plans change, kindly inform us as soon as pos
       }
     });
   </script>
+
+  <!--
+  ============================================================
+  ✅ SERVER-SIDE EMAIL SENDING (Google Apps Script) - IMPORTANT
+  ============================================================
+
+  GitHub Pages cannot send email directly from JavaScript.
+  You MUST add email sending in your Apps Script web app:
+
+  Example (replace YOUR SHEET logic, keep your existing doPost):
+  ------------------------------------------------------------
+  function doPost(e) {
+    var data = e.parameter; // name, email, guests, attendance, message...
+    // ... save to sheet ...
+
+    // Send email ONLY if email is provided:
+    if (data.email && data.email.trim() !== "") {
+      var subject = "Manel & Ryan Wedding Invitation Confirmation";
+      var body =
+        "Hi " + (data.name || "Guest") + ",\n\n" +
+        "Thank you for your RSVP.\n\n" +
+        "Wedding: April 9, 2026 • 2:00 PM\n" +
+        "Venue: Moraville The Garden, Palestina, Pili, Camarines Sur\n" +
+        "Guests: " + (data.guests || "-") + "\n" +
+        "Attendance: " + (data.attendance || "-") + "\n\n" +
+        "Please keep a screenshot of your invitation pass from the website.\n\n" +
+        "With love,\nManel & Ryan";
+
+      MailApp.sendEmail(data.email.trim(), subject, body);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  ------------------------------------------------------------
+
+  Also ensure your deployment is set to:
+  Deploy > New deployment > Web app
+  - Execute as: Me
+  - Who has access: Anyone
+  -->
 </body>
 </html>
